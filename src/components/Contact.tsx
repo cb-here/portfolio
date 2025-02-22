@@ -1,13 +1,50 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { Mail, MapPin } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState<boolean | null>(null);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const serviceId = 'service_spoxrlu';
+      const templateId = 'template_ojb0qir';
+      const publicKey = 'JDXZ7z-6V3BOkne6x';
+
+      await emailjs.send(serviceId, templateId, formData, publicKey);
+
+      setSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSuccess(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  useEffect(() => {
+    if (success !== null) {
+      const timer = setTimeout(() => setSuccess(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
   return (
     <section id="contact" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
@@ -42,6 +79,7 @@ export default function Contact() {
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="space-y-6"
+              onSubmit={handleSubmit}
             >
               <div>
                 <label
@@ -53,7 +91,10 @@ export default function Contact() {
                 <input
                   type="text"
                   id="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  required
                 />
               </div>
               <div>
@@ -66,7 +107,10 @@ export default function Contact() {
                 <input
                   type="email"
                   id="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  required
                 />
               </div>
               <div>
@@ -79,15 +123,29 @@ export default function Contact() {
                 <textarea
                   id="message"
                   rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  required
                 ></textarea>
               </div>
               <button
                 type="submit"
                 className="w-full bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
+                disabled={loading}
               >
-                Send Message
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
+              {success === true && (
+                <p className="text-green-600 text-center mt-4">
+                  Message sent successfully!
+                </p>
+              )}
+              {success === false && (
+                <p className="text-red-600 text-center mt-4">
+                  Failed to send message. Please try again.
+                </p>
+              )}
             </motion.form>
           </div>
         </motion.div>

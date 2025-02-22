@@ -1,14 +1,11 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
-import { ArrowDown, Layout, Server, Terminal, Database, Cpu, Cloud } from 'lucide-react';
+import { ArrowDown, Layout, Server, Database } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const skills = [
   { icon: <Layout className="w-6 h-6 bg-gradient-to-r from-pink-500 to-rose-500" />, text: 'Frontend', color: 'from-pink-500 to-rose-500' },
   { icon: <Server className="w-6 h-6 bg-gradient-to-r from-blue-500 to-cyan-500" />, text: 'Backend', color: 'from-blue-500 to-cyan-500' },
   { icon: <Database className="w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500" />, text: 'Database', color: 'from-green-500 to-emerald-500' },
-  { icon: <Cloud className="w-6 h-6 bg-gradient-to-r from-purple-500 to-indigo-500" />, text: 'Cloud', color: 'from-purple-500 to-indigo-500' },
-  { icon: <Terminal className="w-6 h-6 bg-gradient-to-r from-orange-500 to-amber-500" />, text: 'DevOps', color: 'from-orange-500 to-amber-500' },
-  { icon: <Cpu className="w-6 h-6 bg-gradient-to-r from-teal-500 to-cyan-500" />, text: 'Systems', color: 'from-teal-500 to-cyan-500' },
 ];
 
 const ParticleField = () => {
@@ -175,7 +172,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="text-7xl md:text-9xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-500 to-purple-400 bg-[length:200%_auto] animate-gradient"
         >
-          Hi, I'm CBHere
+          Hi, I'm CB <br />Vishwakarma
         </motion.h1>
 
         <motion.p

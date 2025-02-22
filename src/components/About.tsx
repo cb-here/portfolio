@@ -39,17 +39,12 @@ export default function About() {
               className="space-y-6"
             >
               <p className="text-gray-600">
-                I'm a passionate Full Stack Developer with a keen eye for design and
-                user experience. With years of experience in building web
-                applications, I specialize in creating beautiful, functional, and
-                scalable solutions.
+              "I'm a passionate Full Stack Developer with a strong interest in design and user experience. I love building beautiful, functional, and scalable web applications while continuously learning and improving my skills.
               </p>
               <p className="text-gray-600">
-                My journey in tech started with a curiosity about how things work
-                on the internet. Today, I help businesses and individuals bring
-                their ideas to life through code and creativity.
+              My journey in tech began with a curiosity about how the internet works, and now I'm dedicated to turning ideas into reality through code and creativity. I'm excited to contribute, grow, and collaborate with teams to create impactful digital experiences."
               </p>
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-wrap">
                 <span className="px-4 py-2 bg-purple-100 text-purple-600 rounded-full">
                   React
                 </span>
@@ -57,7 +52,16 @@ export default function About() {
                   Node.js
                 </span>
                 <span className="px-4 py-2 bg-green-100 text-green-600 rounded-full">
-                  TypeScript
+                  Express.js
+                </span>
+                <span className="px-4 py-2 bg-orange-100 text-yellow-600 rounded-full">
+                  Mongoose
+                </span>
+                <span className="px-4 py-2 bg-yellow-100 text-gray-600 rounded-full">
+                  Javascript
+                </span>
+                <span className="px-4 py-2 bg-blue-100 text-orange-600 rounded-full">
+                  Python
                 </span>
               </div>
             </motion.div>

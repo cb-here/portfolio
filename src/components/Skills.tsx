@@ -6,24 +6,23 @@ const skills = [
     category: 'Frontend',
     items: [
       { name: 'React', level: 90, color: 'from-blue-500 to-cyan-500' },
-      { name: 'TypeScript', level: 85, color: 'from-blue-600 to-indigo-600' },
-      { name: 'Next.js', level: 80, color: 'from-gray-700 to-gray-900' },
+      { name: 'Javascript', level: 85, color: 'from-blue-600 to-indigo-600' },
     ],
   },
   {
     category: 'Backend',
     items: [
       { name: 'Node.js', level: 85, color: 'from-green-500 to-emerald-500' },
+      { name: 'Express.js', level: 85, color: 'from-orange-500 to-yellow-500' },
       { name: 'Python', level: 80, color: 'from-yellow-500 to-yellow-600' },
-      { name: 'PostgreSQL', level: 75, color: 'from-blue-400 to-indigo-500' },
+      { name: 'MySQL', level: 75, color: 'from-blue-400 to-indigo-500' },
+      {name: 'Mongoose', level: 90, color: 'from-yellow-400 to-purple-600'}
     ],
   },
   {
     category: 'Tools & Others',
     items: [
       { name: 'Git', level: 90, color: 'from-orange-500 to-red-500' },
-      { name: 'Docker', level: 75, color: 'from-blue-500 to-blue-600' },
-      { name: 'AWS', level: 70, color: 'from-yellow-600 to-orange-600' },
     ],
   },
 ];
@@ -61,7 +60,7 @@ export default function Skills() {
                 <div className="space-y-6">
                   {category.items.map((skill, index) => (
                     <motion.div
-                      key={skill.name}
+                      key={`${category.category}-${skill.name}`}
                       initial={{ opacity: 0, x: -20 }}
                       animate={inView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.6, delay: index * 0.1 + categoryIndex * 0.2 }}
