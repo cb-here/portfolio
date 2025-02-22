@@ -3,12 +3,12 @@ import { ArrowDown, Layout, Server, Terminal, Database, Cpu, Cloud } from 'lucid
 import { useState, useEffect } from 'react';
 
 const skills = [
-  { icon: <Layout className="w-6 h-6" />, text: 'Frontend', color: 'from-pink-500 to-rose-500' },
-  { icon: <Server className="w-6 h-6" />, text: 'Backend', color: 'from-blue-500 to-cyan-500' },
-  { icon: <Database className="w-6 h-6" />, text: 'Database', color: 'from-green-500 to-emerald-500' },
-  { icon: <Cloud className="w-6 h-6" />, text: 'Cloud', color: 'from-purple-500 to-indigo-500' },
-  { icon: <Terminal className="w-6 h-6" />, text: 'DevOps', color: 'from-orange-500 to-amber-500' },
-  { icon: <Cpu className="w-6 h-6" />, text: 'Systems', color: 'from-teal-500 to-cyan-500' },
+  { icon: <Layout className="w-6 h-6 bg-gradient-to-r from-pink-500 to-rose-500" />, text: 'Frontend', color: 'from-pink-500 to-rose-500' },
+  { icon: <Server className="w-6 h-6 bg-gradient-to-r from-blue-500 to-cyan-500" />, text: 'Backend', color: 'from-blue-500 to-cyan-500' },
+  { icon: <Database className="w-6 h-6 bg-gradient-to-r from-green-500 to-emerald-500" />, text: 'Database', color: 'from-green-500 to-emerald-500' },
+  { icon: <Cloud className="w-6 h-6 bg-gradient-to-r from-purple-500 to-indigo-500" />, text: 'Cloud', color: 'from-purple-500 to-indigo-500' },
+  { icon: <Terminal className="w-6 h-6 bg-gradient-to-r from-orange-500 to-amber-500" />, text: 'DevOps', color: 'from-orange-500 to-amber-500' },
+  { icon: <Cpu className="w-6 h-6 bg-gradient-to-r from-teal-500 to-cyan-500" />, text: 'Systems', color: 'from-teal-500 to-cyan-500' },
 ];
 
 const ParticleField = () => {
@@ -214,7 +214,7 @@ export default function Hero() {
                       rotate: activeIndex === index ? 360 : 0,
                     }}
                     transition={{ duration: 0.5 }}
-                    className="mb-4"
+                    className={`mb-4`}
                   >
                     {skill.icon}
                   </motion.div>
