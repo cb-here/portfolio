@@ -1,74 +1,179 @@
-import { motion } from 'framer-motion';
-import { ArrowDown, Code, Rocket } from 'lucide-react';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { ArrowDown, Layout, Server, Terminal, Database, Cpu, Cloud } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
-export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
+const skills = [
+  { icon: <Layout className="w-6 h-6" />, text: 'Frontend', color: 'from-pink-500 to-rose-500' },
+  { icon: <Server className="w-6 h-6" />, text: 'Backend', color: 'from-blue-500 to-cyan-500' },
+  { icon: <Database className="w-6 h-6" />, text: 'Database', color: 'from-green-500 to-emerald-500' },
+  { icon: <Cloud className="w-6 h-6" />, text: 'Cloud', color: 'from-purple-500 to-indigo-500' },
+  { icon: <Terminal className="w-6 h-6" />, text: 'DevOps', color: 'from-orange-500 to-amber-500' },
+  { icon: <Cpu className="w-6 h-6" />, text: 'Systems', color: 'from-teal-500 to-cyan-500' },
+];
 
-  // Tilt effect for the container
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const { clientX, clientY } = e;
-    const { left, top, width, height } = containerRef.current.getBoundingClientRect();
-    const x = (clientX - left - width / 2) / 20;
-    const y = (clientY - top - height / 2) / 20;
-    containerRef.current.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg)`;
-  };
-
-  const handleMouseLeave = () => {
-    if (containerRef.current) {
-      containerRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-    }
-  };
+const ParticleField = () => {
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
 
   return (
-    <section
-      className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+    <motion.div 
+      style={{ opacity }}
+      className="absolute inset-0 overflow-hidden pointer-events-none"
     >
-      {/* Particle background */}
-      <div className="absolute inset-0 z-0">
-        {[...Array(50)].map((_, i) => (
+      {[...Array(50)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0, 1, 0],
+            scale: [0, 1.5, 0],
+          }}
+          transition={{
+            duration: 2 + Math.random() * 2,
+            repeat: Infinity,
+            delay: Math.random() * 2,
+          }}
+        />
+      ))}
+    </motion.div>
+  );
+};
+
+const GlowingOrb = () => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { damping: 25, stiffness: 200 };
+  const rotateX = useSpring(mouseY, springConfig);
+  const rotateY = useSpring(mouseX, springConfig);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = document.getElementById('orb')?.getBoundingClientRect();
+      if (rect) {
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        mouseX.set((e.clientX - centerX) / 30);
+        mouseY.set((e.clientY - centerY) / 30);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  return (
+    <motion.div
+      id="orb"
+      className="relative w-48 h-48 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 p-1"
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: 'preserve-3d',
+        perspective: '1000px',
+      }}
+    >
+      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 blur-xl opacity-50" />
+      <div className="w-full h-full rounded-full bg-black flex items-center justify-center relative overflow-hidden">
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-500/20"
+          animate={{
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.span 
+          className="text-6xl font-bold text-white relative z-10"
+          animate={{ 
+            textShadow: [
+              '0 0 20px rgba(139, 92, 246, 0.5)',
+              '0 0 40px rgba(59, 130, 246, 0.5)',
+              '0 0 20px rgba(139, 92, 246, 0.5)',
+            ],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+          }}
+        >
+          CB
+        </motion.span>
+      </div>
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-4 h-4 rounded-full bg-white"
+          style={{
+            top: '50%',
+            left: '50%',
+            translateX: '-50%',
+            translateY: '-50%',
+          }}
+          animate={{
+            rotate: 360,
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear",
+            delay: i * 1,
+          }}
+        >
           <motion.div
-            key={i}
-            initial={{ opacity: 0, y: -100 }}
-            animate={{
-              opacity: [0, 1, 0],
-              y: [0, window.innerHeight],
-              x: [0, Math.random() * 200 - 100],
-            }}
-            transition={{
-              duration: Math.random() * 5 + 3,
-              delay: Math.random() * 2,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            className="absolute w-1 h-1 bg-white rounded-full"
+            className="w-full h-full rounded-full bg-gradient-to-r from-purple-500 to-blue-500"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              transformOrigin: `${96 + i * 16}px 50%`,
             }}
           />
-        ))}
-      </div>
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+};
 
-      {/* Main content */}
-      <motion.div
-        ref={containerRef}
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 text-center p-8 border-2 border-white/10 rounded-3xl backdrop-blur-lg bg-black/50 shadow-2xl"
-        style={{
-          transformStyle: 'preserve-3d',
-        }}
+export default function Hero() {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 300], [0, -100]);
+  const scale = useTransform(scrollY, [0, 300], [1, 0.9]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const backgroundY = useTransform(scrollY, [0, 300], [0, 150]);
+
+  return (
+    <section className="min-h-screen flex items-center justify-center bg-black pt-16 overflow-hidden">
+      <ParticleField />
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.1)_0%,rgba(0,0,0,0)_100%)]" 
+      />
+      
+      <motion.div 
+        style={{ y, scale, opacity }}
+        className="container mx-auto px-6 py-12 relative z-10 text-center"
       >
+        <motion.div
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, type: "spring" }}
+          className="mb-12"
+        >
+          <GlowingOrb />
+        </motion.div>
+
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent"
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-7xl md:text-9xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-500 to-purple-400 bg-[length:200%_auto] animate-gradient"
         >
           Hi, I'm CBHere
         </motion.h1>
@@ -76,61 +181,104 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-xl md:text-2xl text-gray-300 mb-12"
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-xl md:text-2xl text-gray-400 mb-16 max-w-3xl mx-auto"
         >
-          Building the Future, One Line of Code at a Time
+          Transforming ideas into digital reality through innovative code and creative solutions
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex justify-center gap-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.7 }}
+          className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-16"
         >
-          <motion.a
-            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(165, 180, 252, 0.5)' }}
-            whileTap={{ scale: 0.95 }}
-            href="#projects"
-            className="flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 text-white hover:shadow-lg transition-all"
-          >
-            <Code size={20} />
-            View Projects
-          </motion.a>
-
-          <motion.a
-            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(165, 180, 252, 0.5)' }}
-            whileTap={{ scale: 0.95 }}
-            href="#contact"
-            className="flex items-center gap-2 px-8 py-4 rounded-full border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white transition-all"
-          >
-            <Rocket size={20} />
-            Let's Talk
-          </motion.a>
+          {skills.map((skill, index) => (
+            <motion.div
+              key={skill.text}
+              className="relative group"
+              onHoverStart={() => setActiveIndex(index)}
+              onHoverEnd={() => setActiveIndex(null)}
+              whileHover={{ scale: 1.05 }}
+            >
+              <motion.div
+                className={`h-full bg-gradient-to-r ${skill.color} p-[2px] rounded-2xl`}
+                animate={{
+                  scale: activeIndex === index ? [1, 1.02, 1] : 1,
+                }}
+                transition={{ duration: 1, repeat: activeIndex === index ? Infinity : undefined }}
+              >
+                <div className="bg-black h-full rounded-2xl p-6">
+                  <motion.div
+                    animate={{
+                      rotate: activeIndex === index ? 360 : 0,
+                    }}
+                    transition={{ duration: 0.5 }}
+                    className="mb-4"
+                  >
+                    {skill.icon}
+                  </motion.div>
+                  <h3 className="text-white font-semibold">{skill.text}</h3>
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 flex flex-col items-center gap-2"
+          transition={{ duration: 0.5, delay: 0.9 }}
+          className="flex justify-center gap-6"
         >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-6 h-6 rounded-full border-2 border-purple-400 flex items-center justify-center"
+          <motion.a
+            href="#projects"
+            className="group relative px-8 py-4 rounded-xl overflow-hidden"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <ArrowDown size={16} className="text-purple-400" />
-          </motion.div>
-          <span className="text-sm text-gray-400">Scroll Down</span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500"
+              animate={{
+                rotate: [0, 360],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+            <span className="relative text-white font-medium">Explore Projects</span>
+          </motion.a>
+          <motion.a
+            href="#contact"
+            className="relative px-8 py-4 rounded-xl overflow-hidden border-2 border-purple-500"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-500/20"
+              initial={{ x: '100%' }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            <span className="relative text-purple-500 font-medium">Get in Touch</span>
+          </motion.a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className="mt-16"
+        >
+          <ArrowDown className="mx-auto text-purple-500" size={32} />
         </motion.div>
       </motion.div>
-
-      {/* Neon glow effect */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] bg-radial-gradient from-purple-500/20 to-transparent opacity-50" />
-      </div>
     </section>
   );
 }
