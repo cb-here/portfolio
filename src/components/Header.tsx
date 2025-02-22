@@ -142,6 +142,18 @@ export default function Header() {
               >
                 <Mail size={20} />
               </a>
+              <motion.a
+                href="/Chandrabhushan_Vishwakarma_Resume.pdf"
+                download = "Chandrabhushan_Vishwakarma_Resume.pdf"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-2 rounded-lg text-gray-700 hover:bg-purple-50 hover:text-purple-600 transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-file-user"><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 18a3 3 0 1 0-6 0"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><circle cx="12" cy="13" r="2"/></svg>
+              </motion.a>
             </div>
           </motion.div>
         )}
