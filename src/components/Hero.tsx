@@ -170,7 +170,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-7xl md:text-9xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-500 to-purple-400 bg-[length:200%_auto] animate-gradient"
+          className="text-6xl md:text-9xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-blue-500 to-purple-400 bg-[length:200%_auto] animate-gradient"
         >
           Hi, I'm CB <br />Vishwakarma
         </motion.h1>
