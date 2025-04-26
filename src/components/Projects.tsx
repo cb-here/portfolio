@@ -7,8 +7,8 @@ const projects = [
     title: 'QuickServe',
     description: 'A web application to which provides the household services to end users.',
     image: 'quickserve.png',
-    github: 'https://github.com/cb-here/',
-    live: 'https://www.not-available.com/',
+    github: 'https://github.com/cb-here/QuickServe',
+    live: 'https://quickserve-v689.onrender.com/',
     tags: ['HTML', 'Javascript', 'TailwindCSS', 'Django', 'Firebase'],
     color: 'from-purple-500 to-blue-500',
   },
@@ -17,19 +17,20 @@ const projects = [
     description: 'A personal note taking app built in the MERN',
     image: '/noter.png',
     github: 'https://github.com/cb-here/noter-rest-api',
-    live: 'https://project-two.cbhere.com',
+    live: 'https://www.linkedin.com/in/chandrabhushan-vishwakarma-323347352/',
     tags: ['React.js', 'Node.js', 'Express.js', 'Mongoose'],
     color: 'from-blue-500 to-teal-500',
   },
   {
-    title: 'Bloging Site',
-    description: 'A website where user can add and read blogs.',
+    title: 'Personalized Path Generator',
+    description: 'An interactive web application that empowers users to create, explore, and manage personalized learning journeys. Users can share knowledge with the community, making learning a collaborative experience.',
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3',
-    github: 'https://github.com/cb-here/blogging-site',
-    live: 'https://cbhere.vercel.app/',
-    tags: ['EJS', 'Express.js', 'Node.js'],
+    github: 'https://github.com/cb-here/Personal-Learning-Path',
+    live: 'https://personal-learning-path.vercel.app/',
+    tags: ['React.js', 'Express.js', 'Node.js', 'JWT', 'Mongoose', 'Tailwind CSS'],
     color: 'from-teal-500 to-emerald-500',
-  },
+  }
+  
 ];
 
 export default function Projects() {
