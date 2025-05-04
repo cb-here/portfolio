@@ -2,7 +2,20 @@ import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Footer() {
-
+  const impLinks = [
+    {
+      title: 'jsonplaceholder/users',
+      url: 'https://jsonplaceholder.typicode.com/users'
+    },
+    {
+      title: 'javascript.info',
+      url: 'https://javascript.info/intro'
+    },
+    {
+      title: 'react tutorial',
+      'url': 'https://www.youtube.com/@PedroTechnologies'
+    }
+  ]
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-6">
@@ -87,6 +100,25 @@ export default function Footer() {
           viewport={{ once: true }}
           className="pt-8 mt-8 border-t border-gray-800"
         >
+          <div className="px-2 md:px-10">
+            <h1 className="text-green-400 mb-4 text-xl">Important Links for Developers: </h1>
+            <div className="flex gap-6 flex-col md:flex-row">
+              {
+                impLinks.map((link, index) => (
+                  <motion.a 
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 text-sm hover:text-purple-500 transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  >
+                    {link.title}
+                  </motion.a>
+                ))
+              }
+            </div>
+          </div>
         </motion.div>
       </div>
     </footer>
