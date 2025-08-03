@@ -1,12 +1,5 @@
-import {
-  ExternalLink,
-  Github,
-  Code,
-  Globe,
-  Sparkles,
-  Zap,
-  Star,
-} from "lucide-react";
+import { ExternalLink, Github, Code, Globe } from "lucide-react";
+import { useState } from "react";
 
 const Projects = () => {
   const projects = [
@@ -21,6 +14,7 @@ const Projects = () => {
       icon: Globe,
       color: "blue",
       gradient: "from-blue-500 to-cyan-500",
+      glowColors: ["rgba(59,130,246,0.2)", "rgba(6,182,212,0.2)"],
       liveUrl: "https://quickserve-v689.onrender.com/",
       githubUrl: "https://github.com/cb-here/QuickServe",
     },
@@ -35,6 +29,7 @@ const Projects = () => {
       icon: Code,
       color: "green",
       gradient: "from-green-500 to-emerald-500",
+      glowColors: ["rgba(34,197,94,0.2)", "rgba(16,185,129,0.2)"],
       liveUrl: "https://task-tracker-kappa-lovat.vercel.app/",
       githubUrl: "https://github.com/cb-here/task-tracker",
     },
@@ -42,149 +37,130 @@ const Projects = () => {
       title: "Personal Learning Path",
       description:
         "A personal learning path application that helps users track their learning progress, set goals, and manage resources. Built with React.js, Node.js, Express, and MongoDB.",
-      technologies: ["React.js", "Node.js", "Express", "MongoDB", "Tailwind CSS", "XY Flow"],
+      technologies: [
+        "React.js",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Tailwind CSS",
+        "XY Flow",
+      ],
       image:
         "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800",
       category: "Web Application",
       icon: Code,
-      color: "green",
-      gradient: "from-green-500 to-emerald-500",
+      color: "amber",
+      gradient: "from-amber-400 to-yellow-500",
+      glowColors: ["rgba(251,191,36,0.2)", "rgba(253,224,71,0.2)"],
       liveUrl: "https://personal-learning-path.vercel.app/",
       githubUrl: "https://github.com/cb-here/Personal-Learning-Path",
     },
   ];
 
-  return (
-    <section
-      id="projects"
-      className="py-20 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-32 h-32 bg-blue-200/30 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-20 left-20 w-40 h-40 bg-purple-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-cyan-200/10 to-blue-200/10 rounded-full blur-3xl animate-spin-slow"></div>
-      </div>
+  const [hoverStates, setHoverStates] = useState(
+    projects.map(() => ({ x: 0, y: 0 }))
+  );
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-semibold mb-4 animate-fade-in-up">
-            <Star size={16} />
-            <span>Portfolio</span>
-          </div>
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 animate-fade-in-up delay-200">
-            Featured{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              Projects
-            </span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up delay-300">
-            A showcase of my recent work and the technologies I'm passionate
-            about
-          </p>
+  const handleMouseMove = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    index: number
+  ) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setHoverStates((prev) => {
+      const newStates = [...prev];
+      newStates[index] = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      };
+      return newStates;
+    });
+  };
+
+  return (
+    <div>
+      <div className="pt-10 sm:pt-12 md:pt-20 pb-12 sm:pb-16">
+        <div className="text-center pb-6">
+          <section id="projects">
+            <h2 className="text-xl font-semibold text-center text-amber-100">
+              My Recent Projects
+            </h2>
+          </section>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="flex flex-col gap-12">
           {projects.map((project, index) => (
             <div
-              key={project.title}
-              className="group relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-4 hover:scale-105 overflow-hidden border border-white/20 animate-fade-in-up"
-              style={{ animationDelay: `${index * 200}ms` }}>
-              {/* Gradient overlay */}
+              key={index}
+              onMouseMove={(e) => handleMouseMove(e, index)}
+              className={`group relative rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 hover:border-white/20 w-full mx-auto max-w-4xl flex flex-col md:flex-row ${
+                index % 2 !== 0 ? "md:flex-row-reverse" : ""
+              } p-4`}>
               <div
-                className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                className="absolute inset-0 pointer-events-none transition duration-500 rounded-2xl"
+                style={{
+                  background: `linear-gradient(135deg, ${project.glowColors[0]}, ${project.glowColors[1]})`,
+                  maskImage: `radial-gradient(350px at ${hoverStates[index].x}px ${hoverStates[index].y}px, white, transparent)`,
+                  WebkitMaskImage: `radial-gradient(350px at ${hoverStates[index].x}px ${hoverStates[index].y}px, white, transparent)`,
+                }}></div>
 
-              {/* Project Image */}
-              <div className="relative overflow-hidden h-56">
+              <div className="relative z-10 w-full md:w-1/2 h-56 md:h-auto rounded-xl overflow-hidden bg-white/5 flex items-center justify-center">
                 <img
+                  className="object-cover w-full h-full"
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/40 transition-all duration-500"></div>
-
-                {/* Category badge */}
-                <div
-                  className={`absolute top-4 left-4 px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-800 rounded-full text-sm font-semibold border border-white/20 flex items-center space-x-2 group-hover:scale-110 transition-transform duration-300`}>
-                  <project.icon size={14} />
-                  <span>{project.category}</span>
-                </div>
-
-                {/* Floating elements */}
-                <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
-                  <Sparkles size={16} className="text-white" />
-                </div>
               </div>
 
-              {/* Project Content */}
-              <div className="relative p-8">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-2 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-full text-sm font-medium hover:from-blue-100 hover:to-purple-100 hover:text-blue-600 transition-all duration-300 transform hover:scale-105 cursor-default"
-                      style={{
-                        animationDelay: `${index * 200 + techIndex * 100}ms`,
-                      }}>
-                      {tech}
-                    </span>
-                  ))}
+              <div className="relative z-10 flex flex-col justify-between md:w-1/2 px-4 mt-4 md:mt-0">
+                <div>
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="shiny-text text-sm text-gray-400">
+                    {project.description}
+                  </p>
+                  <p className="mt-4 text-xs text-gray-500 uppercase tracking-widest">
+                    Tech Stack
+                  </p>
+                  <div className="flex gap-2 mt-2 flex-wrap">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-xs text-white/70 hover:text-yellow-300 hover:border-yellow-400 transition-all duration-300">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="flex space-x-4">
+                <div className="flex space-x-3 mt-6">
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/btn relative flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-2xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl overflow-hidden">
-                    <ExternalLink
-                      size={16}
-                      className="group-hover/btn:rotate-12 transition-transform duration-300"
-                    />
-                    <span>Live Demo</span>
+                    className="inline-flex items-center space-x-1.5 bg-white/5 px-3 py-1 rounded-md backdrop-blur-sm shadow-sm hover:shadow-[0_0_8px_1px_rgba(255,215,0,0.15)] transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10 hover:text-yellow-300 text-white/70 text-xs">
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span className="font-medium hidden md:inline text-xs">
+                      Live Demo
+                    </span>
                   </a>
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/btn relative flex items-center space-x-2 border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-2xl hover:border-gray-800 hover:text-gray-800 hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 overflow-hidden">
-                    <Github
-                      size={16}
-                      className="group-hover/btn:rotate-12 transition-transform duration-300"
-                    />
-                    <span>Code</span>
+                    className="inline-flex items-center space-x-1.5 bg-white/5 px-3 py-1 rounded-md backdrop-blur-sm shadow-sm hover:shadow-[0_0_8px_1px_rgba(255,215,0,0.15)] transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10 hover:text-yellow-300 text-white/70 text-xs">
+                    <Github className="w-3.5 h-3.5" />
+                    <span className="font-medium hidden md:inline text-xs">
+                      View Code
+                    </span>
                   </a>
                 </div>
               </div>
-
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             </div>
           ))}
         </div>
-
-        {/* Enhanced View More Projects Button */}
-        <div className="text-center mt-16 animate-fade-in-up delay-800">
-          <button className="group relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-10 py-4 rounded-full hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 transition-all duration-500 transform hover:scale-110 shadow-2xl hover:shadow-blue-500/25 overflow-hidden">
-            <span className="relative z-10 flex items-center space-x-2 font-semibold">
-              <span>View All Projects</span>
-              <Zap
-                size={18}
-                className="group-hover:rotate-12 transition-transform duration-300"
-              />
-            </span>
-          </button>
-        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
