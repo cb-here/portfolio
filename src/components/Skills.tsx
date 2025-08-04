@@ -30,6 +30,47 @@ const Skills = () => {
         </button>
 
         <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
+  <div className="relative z-10 flex items-center gap-2 transition-all duration-300">
+    <div className="flex items-center gap-2">
+      <svg viewBox="0 0 128 128" className="w-4 h-4 sm:w-5 sm:h-5" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M64 0C28.654 0 0 28.654 0 64s28.654 64 64 64c35.346 0 64-28.654 64-64S99.346 0 64 0zM85.234 97.617l-9.442-14.648-15.238-24.236v38.882h-8.284V48.385h8.606l22.338 35.342 9.286 14.603h-.002l-.002.002z"/>
+      </svg>
+      <span className="text-xs sm:text-sm">Next.js</span>
+    </div>
+  </div>
+  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+  <div className="absolute inset-0 rounded-full pointer-events-none ring-1 ring-white/5 group-hover:ring-white/10 transition-all duration-300"></div>
+</button>
+
+        <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
+  <div className="relative z-10 flex items-center gap-2 transition-all duration-300">
+    <div className="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" className="w-4 h-4 sm:w-5 sm:h-5" fill="#44B78B">
+        <path d="M64 0C28.654 0 0 28.654 0 64s28.654 64 64 64 64-28.654 64-64S99.346 0 64 0zm7.938 29.375h13.469v57.75c-5.125 1-10.031 1.5-14.75 1.5-8.312 0-14.063-1.562-17.25-4.688-3.188-3.125-4.781-8.313-4.781-15.563 0-7.156 1.719-12.375 5.156-15.625 3.438-3.25 9.031-4.875 16.781-4.875 1.469 0 3.031.062 4.688.188v-18.687zM50.094 35.5c-2.812 0-5.25.844-7.313 2.531-2.063 1.688-3.375 3.812-3.938 6.375-.563 2.562-.844 6.406-.844 11.531v34.063H24.844V47.25c0-8.75 1.063-15.188 3.188-19.313 2.125-4.125 5.406-7.281 9.844-9.469 4.438-2.188 10.344-3.281 17.719-3.281 2.625 0 5.313.219 8.063.656v13.563c-3.281-.75-6.344-1.125-9.219-1.125z" />
+      </svg>
+      <span className="text-xs sm:text-sm">Django</span>
+    </div>
+  </div>
+  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+  <div className="absolute inset-0 rounded-full pointer-events-none ring-1 ring-white/5 group-hover:ring-white/10 transition-all duration-300"></div>
+</button>
+
+        
+        <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
+  <div className="relative z-10 flex items-center gap-2 transition-all duration-300">
+    <div className="flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" className="w-4 h-4 sm:w-5 sm:h-5">
+        <path fill="#3776AB" d="M63.5 0c-5.6 0-11 0.5-15.8 1.5-14.3 3-16.8 9.4-16.8 21v10.3h33.5v4.2H24.6c-11.4 0-21.4 6.9-24.2 20.2-2.8 13.4 2.9 30.4 12.2 38.4 7.3 6.2 16.4 9.1 26.1 9.1 7.8 0 13.9-.7 18.7-2 13.5-3.6 16.5-11 16.5-21.9v-9.6H40.3v-4.1h39.8c11.4 0 21.2-6.9 24-20.3 2.8-13.5-3-30.3-12.3-38.4C84.7 2.9 75.6 0 65.8 0h-2.3zM46 9.2c2.5 0 4.6 2.1 4.6 4.6 0 2.5-2.1 4.6-4.6 4.6-2.5 0-4.6-2.1-4.6-4.6 0-2.5 2.1-4.6 4.6-4.6z"/>
+        <path fill="#FFD43B" d="M128 64c0-7.8-.7-13.9-2-18.7-3.6-13.5-11-16.5-21.9-16.5H93.3v33.5h-4.2V63.5h39.8c11.4 0 21.2 6.9 24 20.3 2.8 13.5-3 30.3-12.3 38.4-7.3 6.2-16.4 9.1-26.1 9.1-7.8 0-13.9-.7-18.7-2-13.5-3.6-16.5-11-16.5-21.9v-9.6H87.7v4.2H60.6v10.3c0 11.4 6.9 21.4 20.2 24.2 13.4 2.8 30.4-2.9 38.4-12.2 6.2-7.3 9.1-16.4 9.1-26.1v-2.3zM81.6 105.1c-2.5 0-4.6-2.1-4.6-4.6 0-2.5 2.1-4.6 4.6-4.6 2.5 0 4.6 2.1 4.6 4.6 0 2.5-2.1 4.6-4.6 4.6z"/>
+      </svg>
+      <span className="text-xs sm:text-sm">Python</span>
+    </div>
+  </div>
+  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+  <div className="absolute inset-0 rounded-full pointer-events-none ring-1 ring-white/5 group-hover:ring-white/10 transition-all duration-300"></div>
+</button>
+
+        <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
           <div className="relative z-10 flex items-center gap-2 transition-all duration-300">
             <div className="flex items-center gap-2">
               <svg className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" viewBox="0 0 128 128" fill="currentColor">
