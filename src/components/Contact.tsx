@@ -80,7 +80,9 @@ const Contact = () => {
           <div className="flex items-center justify-center">
             <MessageCircle size={40} className="text-purple-500 mb-4" />
           </div>
-          <h3 className="text-2xl font-bold text-white">Let’s Connect</h3>
+          <h3 className="text-3xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent">
+            Let’s Connect
+          </h3>
           <p className="text-sm text-gray-400 mt-2">
             Feel free to drop a message!
           </p>

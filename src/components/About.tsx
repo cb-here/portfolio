@@ -36,7 +36,7 @@ const About = () => {
       <div className="hidden md:block w-px bg-white/10 mx-4"></div>
 
       <div className="w-full md:w-[65%] flex flex-col justify-center">
-        <h3 className="text-3xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent mb-2">
+        <h3 className="mt-2 text-3xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent mb-2">
           About Me
         </h3>
         <p className="shiny-text text-sm text-gray-400 leading-relaxed p-1">
