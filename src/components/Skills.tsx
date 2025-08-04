@@ -138,16 +138,7 @@ const Skills = () => {
         </button>
 
         {/* shadcn/ui button */}
-        <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
-          <div className="relative z-10 flex items-center gap-2 transition-all duration-300">
-            <div className="flex items-center gap-2">
-              <Code className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
-              <span className="text-xs sm:text-sm">shadcn/ui</span>
-            </div>
-          </div>
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-          <div className="absolute inset-0 rounded-full pointer-events-none ring-1 ring-white/5 group-hover:ring-white/10 transition-all duration-300"></div>
-        </button>
+        
 
         {/* Git button */}
         <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
@@ -176,22 +167,7 @@ const Skills = () => {
         </button>
 
         {/* Figma button */}
-        <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
-          <div className="relative z-10 flex items-center gap-2 transition-all duration-300">
-            <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" viewBox="0 0 128 128" fill="currentColor">
-                <path fill="#0acf83" d="M45.5 129c11.9 0 21.5-9.6 21.5-21.5V86H45.5C33.6 86 24 95.6 24 107.5S33.6 129 45.5 129zm0 0"></path>
-                <path fill="#a259ff" d="M24 64.5C24 52.6 33.6 43 45.5 43H67v43H45.5C33.6 86 24 76.4 24 64.5zm0 0"></path>
-                <path fill="#f24e1e" d="M24 21.5C24 9.6 33.6 0 45.5 0H67v43H45.5C33.6 43 24 33.4 24 21.5zm0 0"></path>
-                <path fill="#ff7262" d="M67 0h21.5C100.4 0 110 9.6 110 21.5S100.4 43 88.5 43H67zm0 0"></path>
-                <path fill="#1abcfe" d="M110 64.5c0 11.9-9.6 21.5-21.5 21.5S67 76.4 67 64.5 76.6 43 88.5 43 110 52.6 110 64.5zm0 0"></path>
-              </svg>
-              <span className="text-xs sm:text-sm">Figma</span>
-            </div>
-          </div>
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-          <div className="absolute inset-0 rounded-full pointer-events-none ring-1 ring-white/5 group-hover:ring-white/10 transition-all duration-300"></div>
-        </button>
+        
 
         {/* GitHub button */}
         <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
@@ -209,16 +185,7 @@ const Skills = () => {
         </button>
 
         {/* Framer Motion button */}
-        <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
-          <div className="relative z-10 flex items-center gap-2 transition-all duration-300">
-            <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" />
-              <span className="text-xs sm:text-sm">Framer Motion</span>
-            </div>
-          </div>
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
-          <div className="absolute inset-0 rounded-full pointer-events-none ring-1 ring-white/5 group-hover:ring-white/10 transition-all duration-300"></div>
-        </button>
+        
 
         {/* Vite button */}
         <button className="inline-flex items-center justify-center relative overflow-hidden rounded-full px-5 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ease-in-out text-white group" style={{ border: "1px solid rgba(255, 255, 255, 0.06)", background: "transparent", padding: "11px 21px" }}>
