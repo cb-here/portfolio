@@ -9,6 +9,11 @@ const Header = () => {
             Projects
           </a>
           <a
+            href="#blog"
+            className="hover:scale-105 transition-transform duration-200 hover:text-gray-300">
+            Blog
+          </a>
+          <a
             href="#about"
             className="hover:scale-105 transition-transform duration-200 hover:text-gray-300">
             About Me
