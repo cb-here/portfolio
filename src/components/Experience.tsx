@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar, MapPin, ExternalLink } from "lucide-react";
+import { Calendar, MapPin} from "lucide-react";
 
 const Experience = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -65,8 +65,7 @@ const Experience = () => {
         <div className="space-y-6">
           {experiences.map((exp, index) => (
             <div key={index} className="relative">
-              {/* Timeline line */}
-              {index !== experiences.length - 1 && (
+              {index !== experiences.length && (
                 <div className="absolute left-6 top-12 w-px h-16 bg-gradient-to-b from-white/20 to-transparent"></div>
               )}
               

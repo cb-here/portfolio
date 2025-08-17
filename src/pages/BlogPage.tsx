@@ -19,7 +19,7 @@ const BlogPage = () => {
   return (
     <div className="w-full max-w-4xl min-h-screen mx-4">
       <Header />
-      
+
       <div className="pt-20 sm:pt-24 md:pt-28">
         <div className="mb-8">
           <Link
@@ -28,18 +28,19 @@ const BlogPage = () => {
             <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Link>
-          
+
           <h1 className="text-4xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent pb-5">
             Blog
           </h1>
           <p className="text-gray-400 text-lg">
-            Thoughts, tutorials, and insights about web development and technology.
+            Thoughts, tutorials, and insights about web development and
+            technology.
           </p>
         </div>
 
         <div
           onMouseMove={handleMouseMove}
-          className="group relative backdrop-blur-md rounded-2xl p-6 overflow-hidden border border-white/10 transition-all duration-500 hover:border-white/20">
+          className="group relative backdrop-blur-md rounded-2xl p-2 sm:p-6 overflow-hidden border border-white/10 transition-all duration-500 hover:border-white/20">
           <div
             className="absolute inset-0 rounded-2xl opacity-100 transition duration-500 pointer-events-none"
             style={{
@@ -53,7 +54,7 @@ const BlogPage = () => {
             {blogPosts.map((post) => (
               <article
                 key={post.id}
-                className="group/card bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:bg-white/10">
+                className="group/card bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:bg-white/10">
                 <Link to={`/blog/${post.slug}`} className="block">
                   <div className="flex flex-col lg:flex-row gap-6">
                     <div className="lg:w-1/3">
@@ -67,7 +68,9 @@ const BlogPage = () => {
                       <div className="flex items-center gap-4 mb-3 text-sm text-gray-400">
                         <div className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
-                          <span>{new Date(post.date).toLocaleDateString()}</span>
+                          <span>
+                            {new Date(post.date).toLocaleDateString()}
+                          </span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
