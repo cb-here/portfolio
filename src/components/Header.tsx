@@ -9,7 +9,7 @@ const Header = () => {
             Projects
           </a>
           <a
-            href="#blog"
+            href="/blog"
             className="hover:scale-105 transition-transform duration-200 hover:text-gray-300">
             Blog
           </a>

@@ -1,14 +1,8 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Experience from "./components/Experience";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Blog from "./components/Blog";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-
+import Home from "./pages/Home";
+import BlogPage from "./pages/BlogPage";
+import BlogPost from "./pages/BlogPost";
 
 const TypingLoader = ({ onComplete }: {onComplete: () => void}) => {
   const [typedText, setTypedText] = useState("");
@@ -31,7 +25,6 @@ const TypingLoader = ({ onComplete }: {onComplete: () => void}) => {
 
    return () => clearInterval(interval);
  }, [onComplete]);
-
 
   return (
     <div className="flex items-center font-mono justify-center h-screen w-full bg-black text-white text-4xl tracking-widest">
@@ -61,19 +54,15 @@ function App() {
       {isLoading ? (
         <TypingLoader onComplete={() => setIsLoading(false)} />
       ) : (
-        <div className="flex justify-center min-h-screen w-full overflow-hidden relative bg-black text-white">
-          <div className="w-full max-w-3xl min-h-screen mx-4">
-            <Header />
-            <Hero />
-            <Skills />
-            <Projects />
-            <Blog />
-            <About />
-            <Experience />
-            <Contact />
-            <Footer />
+        <Router>
+          <div className="flex justify-center min-h-screen w-full overflow-hidden relative bg-black text-white">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+            </Routes>
           </div>
-        </div>
+        </Router>
       )}
     </>
   );
