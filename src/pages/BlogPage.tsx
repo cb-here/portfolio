@@ -29,7 +29,7 @@ const BlogPage = () => {
             Back to Home
           </Link>
           
-          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent pb-5">
             Blog
           </h1>
           <p className="text-gray-400 text-lg">
