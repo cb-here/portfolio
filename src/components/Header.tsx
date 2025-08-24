@@ -5,22 +5,20 @@ const Header = () => {
         <div className="flex items-center gap-8 text-white text-md font-medium">
           <a
             href="#projects"
-            className="hover:scale-105 transition-transform duration-200 hover:text-gray-300">
+            className="hover:scale-105 transition-transform duration-200 hover:text-gray-300"
+          >
             Projects
           </a>
           <a
-            href="/blog"
-            className="hover:scale-105 transition-transform duration-200 hover:text-gray-300">
-            Blog
-          </a>
-          <a
             href="#about"
-            className="hover:scale-105 transition-transform duration-200 hover:text-gray-300">
+            className="hover:scale-105 transition-transform duration-200 hover:text-gray-300"
+          >
             About Me
           </a>
           <a
             href="#contact"
-            className="hover:scale-105 transition-transform duration-200 hover:text-gray-300 inline-block">
+            className="hover:scale-105 transition-transform duration-200 hover:text-gray-300 inline-block"
+          >
             Contact Me
           </a>
         </div>
