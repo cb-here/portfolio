@@ -5,7 +5,7 @@ const Hero = () => {
         <div className="order-2 sm:order-1">
           <div>
             <img
-              className="h-[70px] w-[70px] object-cover rounded-lg"
+              className="h-[110px] w-[100px] object-cover rounded-lg"
               src="/cbhere.gif"
               alt="Profile"
             />
