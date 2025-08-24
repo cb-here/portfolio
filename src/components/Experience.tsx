@@ -47,7 +47,7 @@ const Experience = () => {
     <div
       id="experience"
       onMouseMove={handleMouseMove}
-      className="group relative mt-4 sm:mt-6 z-10 flex flex-col w-full backdrop-blur-md rounded-2xl p-6 overflow-hidden border border-white/10 transition-all duration-500 hover:border-white/20">
+      className="group relative mt-4 sm:mt-6 z-10 flex flex-col w-full backdrop-blur-md rounded-2xl p-4 sm:p-6 overflow-hidden border border-white/10 transition-all duration-500 hover:border-white/20">
       <div
         className="absolute inset-0 rounded-2xl opacity-100 transition duration-500 pointer-events-none"
         style={{
@@ -58,21 +58,21 @@ const Experience = () => {
         }}></div>
 
       <div className="relative z-10">
-        <h3 className="text-3xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent mb-6">
+        <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent mb-6">
           Experience
         </h3>
 
-        <div className="space-y-6">
+        <div className="space-y-3 sm:space-y-6">
           {experiences.map((exp, index) => (
             <div key={index} className="relative">
               {index !== experiences.length && (
-                <div className="absolute left-6 top-12 w-px h-16 bg-gradient-to-b from-white/20 to-transparent"></div>
+                <div className="absolute left-4 sm:left-6 top-12 w-px h-16 bg-gradient-to-b from-white/20 to-transparent"></div>
               )}
               
               {/* Timeline dot */}
-              <div className="absolute left-4 top-6 w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 border-2 border-black"></div>
+              <div className="absolute left-2 sm:left-4 top-6 w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 border-2 border-black"></div>
               
-              <div className="ml-12 pb-6">
+              <div className="ml-8 sm:ml-12 pb-6">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2">
                   <div>
                     <h4 className="text-xl font-semibold text-white mb-1">
