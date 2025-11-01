@@ -1,167 +1,124 @@
-import { ExternalLink, Github, Code, Globe } from "lucide-react";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const Projects = () => {
+export default function Projects() {
   const projects = [
     {
       title: "Quickserve",
-      description:
-        "A web application built with Django, HTML, CSS, and JavaScript to connect service providers with end users. Features include user authentication, service listings, booking system, and role-based access.",
-      technologies: ["Django", "HTML", "CSS", "JavaScript"],
       image:
         "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "Service Platform",
-      icon: Globe,
-      color: "blue",
-      gradient: "from-blue-500 to-cyan-500",
-      glowColors: ["rgba(59,130,246,0.2)", "rgba(6,182,212,0.2)"],
+      status: "Deployed",
       liveUrl: "https://quickserve-v689.onrender.com/",
       githubUrl: "https://github.com/cb-here/QuickServe",
     },
     {
-      title: "Task Tracer",
-      description:
-        "A task management application built with React.js, Node.js, Express, and MongoDB. It allows users to create, update, and track tasks efficiently, with features like status updates and deadlines.",
-      technologies: ["React.js", "Node.js", "Express", "MongoDB"],
-      image:
-        "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "Web Application",
-      icon: Code,
-      color: "green",
-      gradient: "from-green-500 to-emerald-500",
-      glowColors: ["rgba(34,197,94,0.2)", "rgba(16,185,129,0.2)"],
-      liveUrl: "https://task-tracker-kappa-lovat.vercel.app/",
-      githubUrl: "https://github.com/cb-here/task-tracker",
-    },
-    {
       title: "Personal Learning Path",
-      description:
-        "A personal learning path application that helps users track their learning progress, set goals, and manage resources. Built with React.js, Node.js, Express, and MongoDB.",
-      technologies: [
-        "React.js",
-        "Node.js",
-        "Express",
-        "MongoDB",
-        "Tailwind CSS",
-        "XY Flow",
-      ],
       image:
         "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "Web Application",
-      icon: Code,
-      color: "amber",
-      gradient: "from-amber-400 to-yellow-500",
-      glowColors: ["rgba(251,191,36,0.2)", "rgba(253,224,71,0.2)"],
+      status: "Deployed",
       liveUrl: "https://personal-learning-path.vercel.app/",
       githubUrl: "https://github.com/cb-here/Personal-Learning-Path",
     },
+    
   ];
-
-  const [hoverStates, setHoverStates] = useState(
-    projects.map(() => ({ x: 0, y: 0 }))
-  );
-
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
-  ) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setHoverStates((prev) => {
-      const newStates = [...prev];
-      newStates[index] = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      };
-      return newStates;
-    });
-  };
-
   return (
-    <div>
-      <div className="pt-10 sm:pt-12 md:pt-20 pb-12 sm:pb-16">
-        <div className="text-center pb-6">
-          <section id="projects">
-            <h2 className="text-xl font-semibold text-center text-amber-100">
-              My Recent Projects
-            </h2>
-          </section>
-        </div>
-
-        <div className="flex flex-col gap-12">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              onMouseMove={(e) => handleMouseMove(e, index)}
-              className={`group relative rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 hover:border-white/20 w-full mx-auto max-w-4xl flex flex-col md:flex-row ${
-                index % 2 !== 0 ? "md:flex-row-reverse" : ""
-              } p-4`}>
-              <div
-                className="absolute inset-0 pointer-events-none transition duration-500 rounded-2xl"
-                style={{
-                  background: `linear-gradient(135deg, ${project.glowColors[0]}, ${project.glowColors[1]})`,
-                  maskImage: `radial-gradient(350px at ${hoverStates[index].x}px ${hoverStates[index].y}px, white, transparent)`,
-                  WebkitMaskImage: `radial-gradient(350px at ${hoverStates[index].x}px ${hoverStates[index].y}px, white, transparent)`,
-                }}></div>
-
-              <div className="relative z-10 w-full md:w-1/2 h-56 md:h-auto rounded-xl overflow-hidden bg-white/5 flex items-center justify-center">
-                <img
-                  className="object-cover w-full h-full"
-                  src={project.image}
-                  alt={project.title}
-                />
-              </div>
-
-              <div className="relative z-10 flex flex-col justify-between md:w-1/2 px-4 mt-4 md:mt-0">
-                <div>
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="shiny-text text-sm text-gray-400">
-                    {project.description}
-                  </p>
-                  <p className="mt-4 text-xs text-gray-500 uppercase tracking-widest">
-                    Tech Stack
-                  </p>
-                  <div className="flex gap-2 mt-2 flex-wrap">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-xs text-white/70 hover:text-yellow-300 hover:border-yellow-400 transition-all duration-300">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+    <section
+      id="projects"
+      className="py-12 border-t border-[#ffffff10] text-white"
+    >
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-lg mb-2 shiny-text">My work</h2>
+        <h3 className="text-4xl md:text-5xl font-medium mb-8">Projects</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((project) => (
+            <div key={project.title} className="group">
+              <Link
+                to={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-4">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="auto"
+                    width={1280}
+                    height={1024}
+                    className="w-full h-48 md:h-72 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-
-                <div className="flex space-x-3 mt-6">
+              </Link>
+              <div className="flex items-center px-3">
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="grow">
+                    <h4 className="text-2xl font-semibold shiny-text">
+                      {project.title}
+                    </h4>
+                    <p className="py-1 text-sm text-white-icon">
+                      {project.status}
+                    </p>
+                  </div>
+                </a>
+                <div className="flex gap-2 ml-auto">
                   <a
-                    href={project.liveUrl}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 bg-white/5 px-3 py-1 rounded-md backdrop-blur-sm shadow-sm hover:shadow-[0_0_8px_1px_rgba(255,215,0,0.15)] transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10 hover:text-yellow-300 text-white/70 text-xs">
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span className="font-medium hidden md:inline text-xs">
-                      Live Demo
-                    </span>
+                    href={project.githubUrl}
+                    aria-label="GitHub"
+                    className="size-14 flex justify-center items-center text-white-icon hover:text-white transition duration-300 ease-in-out border border-white-icon-tr p-3 rounded-xl bg-[#1414149c] hover:bg-white-icon-tr"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="size-7"
+                    >
+                      <path d="M24 12L18.3431 17.6569L16.9289 16.2426L21.1716 12L16.9289 7.75736L18.3431 6.34315L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6569L0 12L5.65685 6.34315L7.07107 7.75736L2.82843 12ZM9.78845 21H7.66009L14.2116 3H16.3399L9.78845 21Z" />
+                    </svg>
                   </a>
                   <a
-                    href={project.githubUrl}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 bg-white/5 px-3 py-1 rounded-md backdrop-blur-sm shadow-sm hover:shadow-[0_0_8px_1px_rgba(255,215,0,0.15)] transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-500/10 hover:to-pink-500/10 hover:text-yellow-300 text-white/70 text-xs">
-                    <Github className="w-3.5 h-3.5" />
-                    <span className="font-medium hidden md:inline text-xs">
-                      View Code
-                    </span>
+                    href={project.liveUrl}
+                    aria-label="Preview"
+                    className="size-14 flex justify-center items-center text-white-icon hover:text-white transition duration-300 ease-in-out border border-white-icon-tr p-3 rounded-xl bg-[#1414149c] hover:bg-white-icon-tr"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="size-7"
+                    >
+                      <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
+                    </svg>
                   </a>
                 </div>
               </div>
             </div>
           ))}
         </div>
+        <a
+          target="_blank"
+          href="https://github.com/cb-here?tab=repositories"
+          aria-label="GitHub"
+          className="w-full flex items-center justify-center gap-2 mt-9 text-white-icon hover:text-white transition duration-300 ease-in-out border border-white-icon-tr p-3 rounded-full bg-[#1414149c] hover:bg-white-icon-tr hover:scale-105"
+        >
+          <span className="md:text-lg text-md">More projects on</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="size-6"
+          >
+            <path d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z" />
+          </svg>
+        </a>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default Projects;
+}

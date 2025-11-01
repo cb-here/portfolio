@@ -1,30 +1,77 @@
-import React, { useEffect, useState } from "react";
-import { MessageCircle } from "lucide-react";
+import { MapPin } from "lucide-react";
+import Input from "./common/Input";
+import Textarea from "./common/Textarea";
 import emailjs from "@emailjs/browser";
+import { useEffect, useState } from "react";
 
-const Contact = () => {
+export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
     message: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<boolean | null>(null);
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+    // Clear error when user types
+    if (errors[name as keyof typeof errors]) {
+      setErrors({ ...errors, [name]: "" });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {
+      name: "",
+      email: "",
+      message: "",
+    };
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email";
+      isValid = false;
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
+    setSuccess(null);
 
     try {
       const serviceId = "service_spoxrlu";
@@ -34,7 +81,7 @@ const Contact = () => {
       await emailjs.send(serviceId, templateId, formData, publicKey);
 
       setSuccess(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("Error: " + error);
       setSuccess(false);
@@ -50,124 +97,145 @@ const Contact = () => {
     }
   }, [success]);
 
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
-
   return (
-    <div
-      id="contact"
-      onMouseMove={handleMouseMove}
-      className="mt-4 sm:mt-6 relative z-10 flex flex-col md:flex-row w-full backdrop-blur-md rounded-2xl p-6 overflow-hidden border border-white/10 transition-all duration-500 hover:border-white/20 group">
-      <div
-        className="absolute inset-0 rounded-2xl opacity-100 transition duration-500 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(168,85,247,0.12), rgba(236,72,153,0.12), rgba(59,130,246,0.08))",
-          maskImage: `radial-gradient(350px at ${position.x}px ${position.y}px, white, transparent)`,
-          WebkitMaskImage: `radial-gradient(350px at ${position.x}px ${position.y}px, white, transparent)`,
-        }}></div>
-
-      <div className="w-full md:w-[35%] flex items-center justify-center p-4">
-        <div className="text-center">
-          <div className="flex items-center justify-center">
-            <MessageCircle size={40} className="text-purple-500 mb-4" />
+    <section id="contact" className="w-full py-12 border-t border-grey">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-lg mb-2 shiny-text">Let's talk</h2>
+        <h3 className="text-4xl md:text-5xl font-medium text-white mb-6">
+          Contact
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="text-white-icon">
+            <p className="mb-4 text-lg">
+              Have a question or a project in mind? Feel free to reach out.
+            </p>
+            <div className="flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-white-icon" />
+              <span className="shiny-text text-lg">India, Mumbai</span>
+            </div>
           </div>
-          <h3 className="text-3xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent">
-            Let’s Connect
-          </h3>
-          <p className="text-sm text-gray-400 mt-2">
-            Feel free to drop a message!
-          </p>
-        </div>
-      </div>
-
-      <div className="hidden md:block w-px bg-white/10 mx-4"></div>
-
-      <div className="w-full md:w-[65%] flex flex-col justify-center">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <label className="text-xs text-white mb-1 block">Full Name</label>
-              <input
-                type="text"
+          <div className="-mt-6">
+            <form
+              id="contact-form"
+              className="flex flex-col"
+              onSubmit={handleSubmit}
+            >
+              <Input
+                label="Name"
                 name="name"
+                placeholder="Enter your name"
+                required
+                fullWidth
                 value={formData.name}
                 onChange={handleChange}
-                required
-                placeholder="Your full name"
-                className="w-full bg-white/10 text-sm text-white placeholder-white/60 px-3 py-2 rounded-lg border border-white/10 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                error={errors.name}
+                disabled={loading}
               />
-            </div>
-            <div>
-              <label className="text-xs text-white mb-1 block">
-                Email Address
-              </label>
-              <input
-                type="email"
+              <Input
+                label="Email"
                 name="email"
+                type="email"
+                placeholder="your@email.com"
+                required
+                fullWidth
                 value={formData.email}
                 onChange={handleChange}
-                required
-                placeholder="you@example.com"
-                className="w-full bg-white/10 text-sm text-white placeholder-white/60 px-3 py-2 rounded-lg  border border-white/10 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                error={errors.email}
+                disabled={loading}
               />
-            </div>
+              <Textarea
+                label="Message"
+                name="message"
+                placeholder="Write your message here..."
+                rows={6}
+                required
+                fullWidth
+                value={formData.message}
+                onChange={handleChange}
+                error={errors.message}
+                disabled={loading}
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className={`px-4 py-2 bg-white-icon-tr text-white rounded-lg transition-all border border-white-icon-tr hover:opacity-100 hover:bg-white-icon-tr mt-4 ${
+                  loading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "opacity-60 hover:opacity-100"
+                }`}
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg
+                      className="animate-spin h-5 w-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Sending...
+                  </span>
+                ) : (
+                  "Submit"
+                )}
+              </button>
+            </form>
+            {success === true && (
+              <div className="mt-4 p-4 bg-green-500/10 border border-green-500/50 rounded-lg flex items-center gap-2">
+                <svg
+                  className="w-5 h-5 text-green-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <p className="text-green-400">
+                  Message sent successfully! I'll get back to you soon.
+                </p>
+              </div>
+            )}
+            {success === false && (
+              <div className="mt-4 p-4 bg-red-500/10 border border-red-500/50 rounded-lg flex items-center gap-2">
+                <svg
+                  className="w-5 h-5 text-red-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+                <p className="text-red-400">
+                  Failed to send message. Please try again.
+                </p>
+              </div>
+            )}
           </div>
-
-          <div>
-            <label className="text-xs text-white mb-1 block">Subject</label>
-            <input
-              type="text"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-              placeholder="What's this about?"
-              className="w-full bg-white/10 text-sm text-white placeholder-white/60 px-3 py-2 rounded-lg  border border-white/10 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-            />
-          </div>
-
-          <div>
-            <label className="text-xs text-white mb-1 block">Message</label>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              rows={4}
-              placeholder="Your message..."
-              className="w-full bg-white/10 text-sm text-white placeholder-white/60 px-3 py-2 rounded-lg  border border-white/10 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full mt-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300">
-            {loading ? "Sending..." : "Send Message"}
-          </button>
-
-          {success === true && (
-            <p className="text-green-400 text-center mt-2">
-              Message sent successfully!
-            </p>
-          )}
-          {success === false && (
-            <p className="text-red-400 text-center mt-2">
-              Failed to send message. Please try again.
-            </p>
-          )}
-        </form>
+        </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default Contact;
+}

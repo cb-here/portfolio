@@ -1,67 +1,85 @@
-import { useState } from "react";
+import Orb from "./common/Orb";
+import { HighlightCard } from "./common/Card";
+import DeviceInfo from "./common/DeviceInfo";
 
-const About = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
+export default function About() {
+  const highlights = [
+    {
+      title: "Full Stack Development",
+      description:
+        "Building end-to-end web applications with modern technologies and best practices.",
+      accentColor: "from-blue-500 to-cyan-500",
+    },
+    {
+      title: "Problem Solver",
+      description:
+        "Passionate about tackling complex challenges with elegant and efficient solutions.",
+      accentColor: "from-purple-500 to-pink-500",
+    },
+    {
+      title: "Continuous Learner",
+      description:
+        "Always exploring new technologies and staying updated with industry trends.",
+      accentColor: "from-green-500 to-emerald-500",
+    },
+  ];
 
   return (
-    <div
+    <section
       id="about"
-      onMouseMove={handleMouseMove}
-      className="group relative mt-4 sm:mt-6 z-10 flex flex-col md:flex-row w-full backdrop-blur-md rounded-2xl p-6 overflow-hidden border border-white/10 transition-all duration-500 hover:border-white/20">
-      <div
-        className="absolute inset-0 rounded-2xl opacity-100 transition duration-500 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(168,85,247,0.12), rgba(236,72,153,0.12), rgba(59,130,246,0.08))",
-          maskImage: `radial-gradient(350px at ${position.x}px ${position.y}px, white, transparent)`,
-          WebkitMaskImage: `radial-gradient(350px at ${position.x}px ${position.y}px, white, transparent)`,
-        }}></div>
-
-      <div className="w-full md:w-[35%] flex items-center justify-center">
-        <img
-          className="rounded-xl object-cover w-full max-h-[300px]"
-          src="/image.png"
-          alt="Profile"
+      className="relative w-full min-h-[700px] border-t border-grey overflow-hidden py-12"
+    >
+      <div className="hidden sm:block absolute inset-0 z-0 pointer-events-auto">
+        <Orb
+          hoverIntensity={0.5}
+          rotateOnHover={true}
+          hue={0}
+          forceHoverState={false}
         />
       </div>
-
-      <div className="hidden md:block w-px bg-white/10 mx-4"></div>
-
-      <div className="w-full md:w-[65%] flex flex-col justify-center">
-        <h3 className="mt-2 text-3xl font-bold bg-gradient-to-r from-[#4facfe] via-[#00f2fe] to-[#43e97b] bg-clip-text text-transparent mb-2">
+      <div className="relative z-10 max-w-5xl mx-auto md:px-6 px-0 pointer-events-none">
+        <h2 className="text-lg mb-2 shiny-text">Get to know me</h2>
+        <h3 className="text-4xl md:text-5xl font-medium text-white mb-8">
           About Me
         </h3>
-        <p className="shiny-text text-sm text-gray-400 leading-relaxed p-1">
-          Hi, I'm Chandrabhushan Vishwakarma. I'm a dedicated Full Stack
-          Developer with a Bachelor's degree in Information Technology. My
-          journey in software development has been driven by curiosity and a
-          passion for solving complex problems through elegant code.
-          <br />
-          My experience includes working with modern frameworks and databases to
-          build scalable applications. I'm always eager to learn new
-          technologies and stay updated with industry trends. When I'm not
-          coding, you'll find me exploring new programming paradigms or
-          contributing to open-source projects.
-        </p>
-        <div className="flex gap-3 mt-4 flex-wrap">
-          <span className="px-3 py-1 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-xs text-white/70 hover:text-yellow-300 hover:border-yellow-400 transition-all duration-300">
-            Full Stack Developer
-          </span>
-          <span className="px-3 py-1 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-xs text-white/70 hover:text-yellow-300 hover:border-yellow-400 transition-all duration-300">
-            Software Engineer
-          </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="space-y-4">
+            <p className="text-white-icon leading-relaxed text-lg shiny-text">
+              Hi, I'm{" "}
+              <span className="font-semibold">Chandrabhushan Vishwakarma</span>.
+              I'm a dedicated Full Stack Developer with a Bachelor's degree in
+              Information Technology.
+            </p>
+            <p className="text-white-icon leading-relaxed">
+              My journey in software development has been driven by curiosity
+              and a passion for solving complex problems through elegant code. I
+              specialize in building scalable web applications using modern
+              frameworks and databases.
+            </p>
+            <p className="text-white-icon leading-relaxed">
+              When I'm not coding, you'll find me exploring new programming
+              paradigms, contributing to open-source projects, or sharing
+              knowledge with the developer community.
+            </p>
+          </div>
+
+          <div className="pointer-events-auto">
+            <DeviceInfo />
+          </div>
+        </div>
+
+        {/* Highlights */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pointer-events-auto">
+          {highlights.map((highlight, index) => (
+            <HighlightCard
+              key={index}
+              title={highlight.title}
+              description={highlight.description}
+              accentColor={highlight.accentColor}
+            />
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default About;
+}
