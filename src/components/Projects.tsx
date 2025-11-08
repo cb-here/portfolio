@@ -66,7 +66,7 @@ export default function Projects() {
                     </p>
                   </div>
                 </a>
-                <div className="">
+                <div className="flex gap-2 ml-auto my-[15px]">
                   <a
                     target="_blank"
                     href={project.githubUrl}
