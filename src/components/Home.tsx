@@ -1,25 +1,53 @@
+import { useEffect, useRef, useState } from "react";
 import TextType from "./common/TypeText";
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(true);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="max-w-5xl mx-auto space-y-8 pt-24 md:pt-36">
+    <div ref={sectionRef} className="max-w-5xl mx-auto space-y-8 pt-24 md:pt-36">
       <div className="text-left space-y-4">
         <p className="text-md md:text-lg shiny-text">
           Hi, I'm Chandrabhushan Vishwakarma
         </p>
         <div className="flex flex-col space-y-4 lg:space-y-0 lg:space-x-8 md:gap-4">
-          <TextType
-            text={[
-              "Frontend Developer",
-              "Backend Developer",
-              "FullStack Developer",
-            ]}
-            typingSpeed={150}
-            pauseDuration={1500}
-            showCursor={true}
-            cursorCharacter="█"
-            className="text-5xl md:text-6xl font-bold"
-          />
+          {isVisible && (
+            <TextType
+              text={[
+                "Frontend Developer",
+                "Backend Developer",
+                "FullStack Developer",
+              ]}
+              typingSpeed={150}
+              pauseDuration={1500}
+              showCursor={true}
+              cursorCharacter="█"
+              className="text-5xl md:text-6xl font-bold"
+            />
+          )}
+          {!isVisible && (
+            <div className="text-5xl md:text-6xl font-bold text-white">
+              FullStack Developer
+            </div>
+          )}
           <p className="mt-6 text-lg text-white">
             I'm a dedicated Full Stack Developer with a Bachelor's degree in
             Information Technology. My journey in software development has been

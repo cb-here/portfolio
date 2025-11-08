@@ -1,216 +1,158 @@
-import CircularText from "./common/CircularText";
-import LetterGlitch from "./common/LetterGlith";
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Heart } from "lucide-react";
 
 export default function Footer() {
+  const [likes, setLikes] = useState(42);
+  const [liked, setLiked] = useState(false);
+  const [showThanks, setShowThanks] = useState(false);
+
+  const handleLike = () => {
+    const wasLiked = liked;
+
+    if (wasLiked) {
+      setLikes(likes - 1);
+    } else {
+      setLikes(likes + 1);
+      setShowThanks(true);
+      setTimeout(() => setShowThanks(false), 3000);
+    }
+
+    setLiked(!wasLiked);
+  };
+
   return (
-    <footer className="w-full py-12 border-t border-[#ffffff10]">
-      <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
-          <div className="flex flex-col lg:items-start items-center space-y-6 gap-9">
-            <div className="flex space-x-6 sm:space-x-8 py-6">
-              <a
-                href="https://github.com/cb-here"
-                target="_blank"
-                className="flex flex-col items-center group"
-                aria-label="GitHub"
-              >
-                <div className="text-white-icon hover:text-white transition duration-300 ease-in-out">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="size-8"
-                      viewBox="0 0 256 259.3"
-                    >
-                      <path
-                        fill="#9edcf2"
-                        d="M200.9 199.8c0 13.9-32.2 25.1-71.9 25.1s-71.9-11.3-71.9-25.1c0-13.9 32.2-25.1 71.9-25.1s71.9 11.2 71.9 25.1m0 0"
-                      ></path>
-                      <defs>
-                        <path
-                          id="SVGRXsXscbb"
-                          d="M98.1 244.8c1.6 7.5 5.5 11.9 9.4 14.5h41.1c5-3.4 10.1-9.8 10.1-21.8v-31s.6-7.7 7.7-10.2c0 0 4.1-2.9-.3-4.5c0 0-19.5-1.6-19.5 14.4v23.6s.8 8.7-3.8 12.3v-29.2s.3-9.3 5.1-12.8c0 0 3.2-5.7-3.8-4.2c0 0-13.4 1.9-14 17.6l-.3 30h-3.2l-.3-30c-.6-15.6-14-17.6-14-17.6c-7-1.6-3.8 4.2-3.8 4.2c4.8 3.5 5.1 12.8 5.1 12.8v29.5c-4.6-3.3-3.8-12.6-3.8-12.6v-23.6c0-16-19.5-14.4-19.5-14.4c-4.5 1.6-.3 4.5-.3 4.5c7 2.6 7.7 10.2 7.7 10.2v21.7z"
-                        ></path>
-                      </defs>
-                      <clipPath id="SVGcXKEtdyL">
-                        <use href="#SVGRXsXscbb"></use>
-                      </clipPath>
-                      <path
-                        fill="#7dbce7"
-                        d="M200.9 199.8c0 13.9-32.2 25.1-71.9 25.1s-71.9-11.3-71.9-25.1c0-13.9 32.2-25.1 71.9-25.1s71.9 11.2 71.9 25.1m0 0"
-                        clipPath="url(#SVGcXKEtdyL)"
-                      ></path>
-                      <path
-                        fill="#9edcf2"
-                        d="m46.9 125.9l-2.1 7.2s-.5 2.6 1.9 3.1c2.6-.1 2.4-2.5 2.2-3.2zm0 0"
-                      ></path>
-                      <path
-                        fill="#010101"
-                        d="m255.8 95.6l.2-.9c-21.1-4.2-42.7-4.3-55.8-3.7c2.1-7.7 2.8-16.7 2.8-26.6c0-14.3-5.4-25.7-14-34.3c1.5-4.9 3.5-15.8-2-29.7c0 0-9.8-3.1-32.1 11.8c-8.7-2.2-18-3.3-27.3-3.3c-10.2 0-20.5 1.3-30.2 3.9C74.4-2.9 64.3.3 64.3.3c-6.6 16.5-2.5 28.8-1.3 31.8c-7.8 8.4-12.5 19.1-12.5 32.2c0 9.9 1.1 18.8 3.9 26.5c-13.2-.5-34-.3-54.4 3.8l.2.9c20.4-4.1 41.4-4.2 54.5-3.7c.6 1.6 1.3 3.2 2 4.7c-13 .4-35.1 2.1-56.3 8.1l.3.9c21.4-6 43.7-7.6 56.6-8c7.8 14.4 23 23.8 50.2 26.7c-3.9 2.6-7.8 7-9.4 14.5c-5.3 2.5-21.9 8.7-31.9-8.5c0 0-5.6-10.2-16.3-11c0 0-10.4-.2-.7 6.5c0 0 6.9 3.3 11.7 15.6c0 0 6.3 21 36.4 14.2V177s-.6 7.7-7.7 10.2c0 0-4.2 2.9.3 4.5c0 0 19.5 1.6 19.5-14.4v-23.6s-.8-9.4 3.8-12.6v38.8s-.3 9.3-5.1 12.8c0 0-3.2 5.7 3.8 4.2c0 0 13.4-1.9 14-17.6l.3-39.3h3.2l.3 39.3c.6 15.6 14 17.6 14 17.6c7 1.6 3.8-4.2 3.8-4.2c-4.8-3.5-5.1-12.8-5.1-12.8v-38.5c4.6 3.6 3.8 12.3 3.8 12.3v23.6c0 16 19.5 14.4 19.5 14.4c4.5-1.6.3-4.5.3-4.5c-7-2.6-7.7-10.2-7.7-10.2v-31c0-12.1-5.1-18.5-10.1-21.8c29-2.9 42.9-12.2 49.3-26.8c12.7.3 35.6 1.9 57.4 8.1l.3-.9c-21.7-6.1-44.4-7.7-57.3-8.1c.6-1.5 1.1-3 1.6-4.6c13.4-.5 35.1-.5 56.3 3.7m0 0"
-                      ></path>
-                      <path
-                        fill="#f5ccb3"
-                        d="M174.6 63.7c6.2 5.7 9.9 12.5 9.9 19.8c0 34.4-25.6 35.3-57.2 35.3S70.1 114 70.1 83.5c0-7.3 3.6-14.1 9.8-19.7c10.3-9.4 27.7-4.4 47.4-4.4s37-5.1 47.3 4.3m0 0"
-                      ></path>
-                      <path
-                        fill="#fff"
-                        d="M108.3 85.3c0 9.5-5.3 17.1-11.9 17.1s-11.9-7.7-11.9-17.1c0-9.5 5.3-17.1 11.9-17.1c6.6-.1 11.9 7.6 11.9 17.1m0 0"
-                      ></path>
-                      <path
-                        fill="#af5c51"
-                        d="M104.5 85.5c0 6.3-3.6 11.4-7.9 11.4c-4.4 0-7.9-5.1-7.9-11.4s3.6-11.4 7.9-11.4s7.9 5.1 7.9 11.4m0 0"
-                      ></path>
-                      <path
-                        fill="#fff"
-                        d="M172.2 85.3c0 9.5-5.3 17.1-11.9 17.1s-11.9-7.7-11.9-17.1c0-9.5 5.3-17.1 11.9-17.1c6.5-.1 11.9 7.6 11.9 17.1m0 0"
-                      ></path>
-                      <path
-                        fill="#af5c51"
-                        d="M168.3 85.5c0 6.3-3.6 11.4-7.9 11.4c-4.4 0-7.9-5.1-7.9-11.4s3.6-11.4 7.9-11.4c4.4 0 7.9 5.1 7.9 11.4m-37.8 15c0 1.6-1.3 3-3 3c-1.6 0-3-1.3-3-3s1.3-3 3-3c1.6 0 3 1.3 3 3m-9.9 7.5c-.2-.5.1-1 .6-1.2s1 .1 1.2.6c.8 2.2 2.8 3.6 5.1 3.6s4.3-1.5 5.1-3.6c.2-.5.7-.8 1.2-.6s.8.7.6 1.2c-1 2.9-3.8 4.9-6.9 4.9s-5.9-2-6.9-4.9m0 0"
-                      ></path>
-                      <path
-                        fill="#c4e5d9"
-                        d="M54.5 121.6c0 .8-.9 1.4-2.1 1.4c-1.1 0-2.1-.6-2.1-1.4s.9-1.4 2.1-1.4s2.1.6 2.1 1.4m5.8 3.2c0 .8-.9 1.4-2.1 1.4c-1.1 0-2.1-.6-2.1-1.4s.9-1.4 2.1-1.4s2.1.6 2.1 1.4m3.5 4.2c0 .8-.9 1.4-2.1 1.4c-1.1 0-2.1-.6-2.1-1.4s.9-1.4 2.1-1.4c1.2-.1 2.1.6 2.1 1.4m3.2 4.8c0 .8-.9 1.4-2.1 1.4c-1.1 0-2.1-.6-2.1-1.4s.9-1.4 2.1-1.4c1.2-.1 2.1.6 2.1 1.4m3.5 4.4c0 .8-.9 1.4-2.1 1.4c-1.1 0-2.1-.6-2.1-1.4s.9-1.4 2.1-1.4s2.1.6 2.1 1.4m4.8 3.9c0 .8-.9 1.4-2.1 1.4c-1.1 0-2.1-.6-2.1-1.4s.9-1.4 2.1-1.4c1.2-.1 2.1.6 2.1 1.4m6.7 2.5c0 .8-.9 1.4-2.1 1.4c-1.1 0-2.1-.6-2.1-1.4s.9-1.4 2.1-1.4s2.1.6 2.1 1.4m6.7 0c0 .8-.9 1.4-2.1 1.4c-1.1 0-2.1-.6-2.1-1.4s.9-1.4 2.1-1.4s2.1.6 2.1 1.4m6.8-1.1c0 .8-.9 1.4-2.1 1.4c-1.1 0-2.1-.6-2.1-1.4s.9-1.4 2.1-1.4c1.1 0 2.1.6 2.1 1.4m0 0"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/chandrabhushan-vishwakarma-323347352/"
-                target="_blank"
-                className="flex flex-col items-center group"
-                aria-label="LinkedIn"
-              >
-                <div className="text-white-icon hover:text-white transition duration-300 ease-in-out">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="size-8"
-                      viewBox="0 0 256 256"
-                    >
-                      <g fill="none">
-                        <rect
-                          width={256}
-                          height={256}
-                          fill="#fff"
-                          rx={60}
-                        ></rect>
-                        <rect
-                          width={256}
-                          height={256}
-                          fill="#0a66c2"
-                          rx={60}
-                        ></rect>
-                        <path
-                          fill="#fff"
-                          d="M184.715 217.685h29.27a4 4 0 0 0 4-3.999l.015-61.842c0-32.323-6.965-57.168-44.738-57.168c-14.359-.534-27.9 6.868-35.207 19.228a.32.32 0 0 1-.595-.161V101.66a4 4 0 0 0-4-4h-27.777a4 4 0 0 0-4 4v112.02a4 4 0 0 0 4 4h29.268a4 4 0 0 0 4-4v-55.373c0-15.657 2.97-30.82 22.381-30.82c19.135 0 19.383 17.916 19.383 31.834v54.364a4 4 0 0 0 4 4M38 59.628c0 11.864 9.767 21.626 21.632 21.626c11.862-.001 21.623-9.769 21.623-21.631C81.253 47.761 71.491 38 59.628 38C47.762 38 38 47.763 38 59.627m6.959 158.058h29.307a4 4 0 0 0 4-4V101.66a4 4 0 0 0-4-4H44.959a4 4 0 0 0-4 4v112.025a4 4 0 0 0 4 4"
-                        ></path>
-                      </g>
-                    </svg>
-                  </div>
-                </div>
-              </a>
-              <a
-                href="https://www.instagram.com/cbh_ere/"
-                target="_blank"
-                className="flex flex-col items-center group"
-                aria-label="Email"
-              >
-                <div className="text-white-icon hover:text-white transition duration-300 ease-in-out">
-                  <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="size-8"
-                      viewBox="0 0 256 256"
-                    >
-                      <g fill="none">
-                        <rect
-                          width={256}
-                          height={256}
-                          fill="url(#SVGWRUqebek)"
-                          rx={60}
-                        ></rect>
-                        <rect
-                          width={256}
-                          height={256}
-                          fill="url(#SVGfkNpldMH)"
-                          rx={60}
-                        ></rect>
-                        <path
-                          fill="#fff"
-                          d="M128.009 28c-27.158 0-30.567.119-41.233.604c-10.646.488-17.913 2.173-24.271 4.646c-6.578 2.554-12.157 5.971-17.715 11.531c-5.563 5.559-8.98 11.138-11.542 17.713c-2.48 6.36-4.167 13.63-4.646 24.271c-.477 10.667-.602 14.077-.602 41.236s.12 30.557.604 41.223c.49 10.646 2.175 17.913 4.646 24.271c2.556 6.578 5.973 12.157 11.533 17.715c5.557 5.563 11.136 8.988 17.709 11.542c6.363 2.473 13.631 4.158 24.275 4.646c10.667.485 14.073.604 41.23.604c27.161 0 30.559-.119 41.225-.604c10.646-.488 17.921-2.173 24.284-4.646c6.575-2.554 12.146-5.979 17.702-11.542c5.563-5.558 8.979-11.137 11.542-17.712c2.458-6.361 4.146-13.63 4.646-24.272c.479-10.666.604-14.066.604-41.225s-.125-30.567-.604-41.234c-.5-10.646-2.188-17.912-4.646-24.27c-2.563-6.578-5.979-12.157-11.542-17.716c-5.562-5.562-11.125-8.979-17.708-11.53c-6.375-2.474-13.646-4.16-24.292-4.647c-10.667-.485-14.063-.604-41.23-.604zm-8.971 18.021c2.663-.004 5.634 0 8.971 0c26.701 0 29.865.096 40.409.575c9.75.446 15.042 2.075 18.567 3.444c4.667 1.812 7.994 3.979 11.492 7.48c3.5 3.5 5.666 6.833 7.483 11.5c1.369 3.52 3 8.812 3.444 18.562c.479 10.542.583 13.708.583 40.396s-.104 29.855-.583 40.396c-.446 9.75-2.075 15.042-3.444 18.563c-1.812 4.667-3.983 7.99-7.483 11.488c-3.5 3.5-6.823 5.666-11.492 7.479c-3.521 1.375-8.817 3-18.567 3.446c-10.542.479-13.708.583-40.409.583c-26.702 0-29.867-.104-40.408-.583c-9.75-.45-15.042-2.079-18.57-3.448c-4.666-1.813-8-3.979-11.5-7.479s-5.666-6.825-7.483-11.494c-1.369-3.521-3-8.813-3.444-18.563c-.479-10.542-.575-13.708-.575-40.413s.096-29.854.575-40.396c.446-9.75 2.075-15.042 3.444-18.567c1.813-4.667 3.983-8 7.484-11.5s6.833-5.667 11.5-7.483c3.525-1.375 8.819-3 18.569-3.448c9.225-.417 12.8-.542 31.437-.563zm62.351 16.604c-6.625 0-12 5.37-12 11.996c0 6.625 5.375 12 12 12s12-5.375 12-12s-5.375-12-12-12zm-53.38 14.021c-28.36 0-51.354 22.994-51.354 51.355s22.994 51.344 51.354 51.344c28.361 0 51.347-22.983 51.347-51.344c0-28.36-22.988-51.355-51.349-51.355zm0 18.021c18.409 0 33.334 14.923 33.334 33.334c0 18.409-14.925 33.334-33.334 33.334s-33.333-14.925-33.333-33.334c0-18.411 14.923-33.334 33.333-33.334"
-                        ></path>
-                        <defs>
-                          <radialGradient
-                            id="SVGWRUqebek"
-                            cx={0}
-                            cy={0}
-                            r={1}
-                            gradientTransform="matrix(0 -253.715 235.975 0 68 275.717)"
-                            gradientUnits="userSpaceOnUse"
-                          >
-                            <stop stopColor="#fd5"></stop>
-                            <stop offset={0.1} stopColor="#fd5"></stop>
-                            <stop offset={0.5} stopColor="#ff543e"></stop>
-                            <stop offset={1} stopColor="#c837ab"></stop>
-                          </radialGradient>
-                          <radialGradient
-                            id="SVGfkNpldMH"
-                            cx={0}
-                            cy={0}
-                            r={1}
-                            gradientTransform="matrix(22.25952 111.2061 -458.39518 91.75449 -42.881 18.441)"
-                            gradientUnits="userSpaceOnUse"
-                          >
-                            <stop stopColor="#3771c8"></stop>
-                            <stop offset={0.128} stopColor="#3771c8"></stop>
-                            <stop
-                              offset={1}
-                              stopColor="#60f"
-                              stopOpacity={0}
-                            ></stop>
-                          </radialGradient>
-                        </defs>
-                      </g>
-                    </svg>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div className="-mt-10">
-              <LetterGlitch
-                glitchSpeed={50}
-                centerVignette={true}
-                outerVignette={false}
-                smooth={true}
-              />
-            </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="grid grid-cols-1 gap-3 w-full max-w-xs py-6">
-              
-            </div>
+    <footer className="w-full relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-purple-500/10" />
+
+      {/* Decorative top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+
+      <div className="max-w-6xl mx-auto px-4 py-16 relative">
+        <div className="flex flex-col items-center text-center space-y-10">
+
+          {/* Social Links with enhanced styling */}
+          <div className="flex gap-4">
+            <motion.a
+              href="https://github.com/cb-here"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-gray-400 hover:text-white transition-all duration-300 hover:border-white/30 hover:shadow-lg hover:shadow-gray-500/20"
+              aria-label="GitHub"
+            >
+              <svg className="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.11.81 2.24 0 1.62-.015 2.925-.015 3.315 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-gray-400/0 to-gray-600/0 group-hover:from-gray-400/10 group-hover:to-gray-600/10 transition-all duration-300" />
+            </motion.a>
+
+            <motion.a
+              href="https://linkedin.com/in/chandrabhushan-vishwakarma-323347352"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-gray-400 hover:text-[#0A66C2] transition-all duration-300 hover:border-[#0A66C2]/30 hover:shadow-lg hover:shadow-blue-500/20"
+              aria-label="LinkedIn"
+            >
+              <svg className="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9.09h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9.09h3.564v11.362zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400/0 to-blue-600/0 group-hover:from-blue-400/10 group-hover:to-blue-600/10 transition-all duration-300" />
+            </motion.a>
+
+            <motion.a
+              href="https://instagram.com/cbh_ere"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-gray-400 hover:text-pink-500 transition-all duration-300 hover:border-pink-500/30 hover:shadow-lg hover:shadow-pink-500/20"
+              aria-label="Instagram"
+            >
+              <svg className="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-pink-400/0 via-purple-400/0 to-orange-400/0 group-hover:from-pink-400/10 group-hover:via-purple-400/10 group-hover:to-orange-400/10 transition-all duration-300" />
+            </motion.a>
           </div>
 
-          <div className="flex flex-col items-center lg:items-start space-y-6">
-            <div className="grid grid-cols-1 gap-3 w-full max-w-xs py-6">
-              <div className="flex items-center justify-center lg:justify-normal space-x-2 text-white text-sm">
-                <div className="flex items-center justify-center lg:justify-normal space-x-2 text-white text-sm">
-                <span>Built with ❤️ using</span>
-                <span className="font-semibold text-sec">
-                  React.js + TailwindCSS
-                </span>
-              </div>
-              </div>
-            </div>
-            <div className="w-full max-w-md">
-              <CircularText
-                text="Chandra*bhushan*Vishwa*karma*"
-                onHover="speedUp"
-                spinDuration={10}
+          {/* Like Button */}
+          <motion.button
+            onClick={handleLike}
+            whileTap={{ scale: 0.93 }}
+            className={`group relative flex items-center gap-3 px-8 py-4 rounded-2xl font-semibold text-sm transition-all duration-300 overflow-hidden ${
+              liked
+                ? "bg-gradient-to-r from-red-500 via-pink-500 to-rose-500 text-white shadow-2xl shadow-pink-500/40 border border-pink-400/50"
+                : "bg-white/5 text-gray-300 backdrop-blur-md hover:text-white hover:bg-white/10 border border-white/10 hover:border-white/20 shadow-lg"
+            }`}
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+
+            <motion.div
+              animate={{ scale: liked ? [1, 1.3, 1] : 1 }}
+              transition={{ duration: 0.3 }}
+              className="relative z-10"
+            >
+              <Heart
+                size={20}
+                className={liked ? "fill-current" : ""}
+                strokeWidth={2.5}
               />
-            </div>
+            </motion.div>
+
+            <motion.span
+              key={likes}
+              initial={{ y: -10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 500, damping: 20 }}
+              className="font-bold text-base relative z-10"
+            >
+              {likes} {likes === 1 ? 'Like' : 'Likes'}
+            </motion.span>
+          </motion.button>
+
+          {/* Decorative divider */}
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+          {/* Tech Stack */}
+          <div className="text-gray-400 text-sm">
+            <p className="flex items-center gap-2 flex-wrap justify-center">
+              <span>Crafted with</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                <span className="font-semibold">React</span>
+              </span>
+              <span>+</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                <span className="font-semibold">TailwindCSS</span>
+              </span>
+            </p>
           </div>
+
+          <AnimatePresence>
+            {showThanks && (
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+                className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-pink-500 via-red-500 to-rose-500 text-white px-6 py-3 rounded-2xl text-sm font-semibold shadow-2xl shadow-pink-500/50 flex items-center gap-2 border border-pink-400/50"
+              >
+                <span>Thanks for the love!</span>
+                <motion.span
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 0.5, repeat: 2 }}
+                >
+                  <Heart className="fill-white" size={16} />
+                </motion.span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </footer>

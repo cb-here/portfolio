@@ -49,7 +49,7 @@ const StyledWrapper = styled.div<{ $fullWidth?: boolean }>`
   .nebula-textarea {
     position: relative;
     width: ${props => props.$fullWidth ? '100%' : '250px'};
-    margin: 30px auto;
+    margin: 16px auto;
   }
 
   .nebula-textarea .textarea {

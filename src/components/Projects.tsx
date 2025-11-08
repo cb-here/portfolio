@@ -30,7 +30,7 @@ export default function Projects() {
         <h3 className="text-4xl md:text-5xl font-medium mb-8">Projects</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <div key={project.title} className="group">
+            <div key={project.title} className="group bg-[#1414149c] p-3 rounded-2xl">
               <Link
                 to={project.liveUrl}
                 target="_blank"
@@ -50,7 +50,7 @@ export default function Projects() {
                   />
                 </div>
               </Link>
-              <div className="flex items-center px-3">
+              <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center px-3">
                 <a
                   href={project.liveUrl}
                   target="_blank"
@@ -66,7 +66,7 @@ export default function Projects() {
                     </p>
                   </div>
                 </a>
-                <div className="flex gap-2 ml-auto">
+                <div className="">
                   <a
                     target="_blank"
                     href={project.githubUrl}

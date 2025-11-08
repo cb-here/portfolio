@@ -47,7 +47,7 @@ export default function Index() {
   return (
     <>
       <Header />
-      <main className="lg:mx-24 mx-6">
+      <main className="lg:mx-32 mx-6">
         <section id="home">
           <Home />
         </section>
