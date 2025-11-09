@@ -50,18 +50,18 @@ const StyledWrapper = styled.div<{ $fullWidth?: boolean }>`
   .nebula-input {
     position: relative;
     width: ${props => props.$fullWidth ? '100%' : '250px'};
-    margin: 16px auto;
+    margin: 8px auto;
   }
 
   .nebula-input .input {
     width: 100%;
-    padding: 15px;
-    border: 2px solid #2a2a3a;
-    background: #00000f;
-    color: white;
-    font-size: 16px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    color: black;
+    font-size: 12px;
     outline: none;
-    border-radius: 8px;
+    border-radius: 50px;
     transition: all 0.4s ease-out;
   }
 
@@ -83,18 +83,20 @@ const StyledWrapper = styled.div<{ $fullWidth?: boolean }>`
   .nebula-input .user-label {
     position: absolute;
     left: 15px;
-    top: 15px;
+    top: 7px;
     pointer-events: none;
     color: #6a6a8a;
     transition: all 0.4s ease-out;
-    background: #00000f;
+    background: #f0f0f1ff;
     padding: 0 5px;
+    border-radius: 6px;
+    font-size: 14px;
   }
 
   .nebula-input .input:focus {
-    border-color: #b56aff;
+    border-color: #b19f9fff;
     box-shadow:
-      0 5px 8px rgba(181, 106, 255, 0.3),
+      0 5px 8px rgba(37, 36, 37, 0.3),
       0 10px 20px rgba(181, 106, 255, 0.2),
       0 15px 40px rgba(181, 106, 255, 0.15),
       0 20px 60px rgba(181, 106, 255, 0.1);
@@ -102,9 +104,9 @@ const StyledWrapper = styled.div<{ $fullWidth?: boolean }>`
 
   .nebula-input .input:focus ~ .user-label,
   .nebula-input .input:not(:placeholder-shown) ~ .user-label {
-    transform: translateY(-25px);
+    transform: translateY(-18px);
     font-size: 12px;
-    color: #d18cff;
+    color: #563352ff;
     left: 10px;
   }
 

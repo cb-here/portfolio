@@ -1,76 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-grey: #f3f3f310;
-  --color-sec: #a476ff;
-  --color-white: #dfdfdf;
-  --color-white-icon: #f3f3f398;
-  --color-background: #101010;
-  --color-white-icon-tr: #f3f3f310;
-  --color-1: #c084fc;
-  --color-2: #f472b6;
-  --color-3: #60a5fa;
-  --color-4: #4ade80;
+  --text-title: 1.75rem;
+  --text-title--line-height: 1.3;
+  --tracking-tight: -0.025em;
+  --tracking-wider: 0.05em;
+   --tw-leading:initial;
 }
 
 body {
-  @apply bg-background text-white;
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  @apply bg-[#fff] text-black;
+  font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   font-weight: 400;
 }
 
-/* Keep monospace for code elements */
-code, pre, .code-content {
-  font-family: 'Fira Code', 'Courier New', monospace !important;
-}
-
-/* Headings with better weight */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
 }
 
-@utility shiny-text {
-  color: #c7c4b876;
-  background: linear-gradient(120deg, #fff0 40%, #fffc, #fff0 60%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  display: inline-block;
-  animation: shine 5s linear infinite;
-}
 
-@keyframes shine {
-  0% {
-    background-position: 100%;
-  }
-
-  to {
-    background-position: -100%;
-  }
-}
-
-.circular-text {
-  margin: 0 auto;
-  border-radius: 50%;
-  width: 200px;
-  position: relative;
-  height: 200px;
-  font-weight: bold;
-  color: #fff;
-  font-weight: 900;
-  text-align: center;
-  cursor: pointer;
-  transform-origin: 50% 50%;
-  -webkit-transform-origin: 50% 50%;
-}
-
-.circular-text span {
-  position: absolute;
-  display: inline-block;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  font-size: 24px;
-  transition: all 0.5s cubic-bezier(0, 0, 0, 1);
+.text-title {
+  font-size: var(--text-title);
+  line-height: var(--tw-leading, var(--text-title--line-height));
 }

@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import type { TextareaHTMLAttributes } from 'react';
+import styled from "styled-components";
+import type { TextareaHTMLAttributes } from "react";
 
-interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'className'> {
+interface TextareaProps
+  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "className"> {
   label: string;
   name: string;
   placeholder?: string;
@@ -33,12 +34,66 @@ const Textarea = ({
           {...props}
         />
         <label className="user-label">{label}</label>
-        <div className="nebula-particle" style={{ '--x': '-0.2', '--y': '-0.4', '--delay': '0.1s' } as React.CSSProperties} />
-        <div className="nebula-particle" style={{ '--x': '0.5', '--y': '-0.2', '--delay': '0.3s' } as React.CSSProperties} />
-        <div className="nebula-particle" style={{ '--x': '0.3', '--y': '0.3', '--delay': '0.5s' } as React.CSSProperties} />
-        <div className="nebula-particle" style={{ '--x': '0.7', '--y': '0.1', '--delay': '0.2s' } as React.CSSProperties} />
-        <div className="nebula-particle" style={{ '--x': '0.1', '--y': '-0.7', '--delay': '0.4s' } as React.CSSProperties} />
-        <div className="nebula-particle" style={{ '--x': '0.6', '--y': '0.4', '--delay': '0.6s' } as React.CSSProperties} />
+        <div
+          className="nebula-particle"
+          style={
+            {
+              "--x": "-0.2",
+              "--y": "-0.4",
+              "--delay": "0.1s",
+            } as React.CSSProperties
+          }
+        />
+        <div
+          className="nebula-particle"
+          style={
+            {
+              "--x": "0.5",
+              "--y": "-0.2",
+              "--delay": "0.3s",
+            } as React.CSSProperties
+          }
+        />
+        <div
+          className="nebula-particle"
+          style={
+            {
+              "--x": "0.3",
+              "--y": "0.3",
+              "--delay": "0.5s",
+            } as React.CSSProperties
+          }
+        />
+        <div
+          className="nebula-particle"
+          style={
+            {
+              "--x": "0.7",
+              "--y": "0.1",
+              "--delay": "0.2s",
+            } as React.CSSProperties
+          }
+        />
+        <div
+          className="nebula-particle"
+          style={
+            {
+              "--x": "0.1",
+              "--y": "-0.7",
+              "--delay": "0.4s",
+            } as React.CSSProperties
+          }
+        />
+        <div
+          className="nebula-particle"
+          style={
+            {
+              "--x": "0.6",
+              "--y": "0.4",
+              "--delay": "0.6s",
+            } as React.CSSProperties
+          }
+        />
         {error && <span className="error-message">{error}</span>}
       </div>
     </StyledWrapper>
@@ -48,17 +103,17 @@ const Textarea = ({
 const StyledWrapper = styled.div<{ $fullWidth?: boolean }>`
   .nebula-textarea {
     position: relative;
-    width: ${props => props.$fullWidth ? '100%' : '250px'};
-    margin: 16px auto;
+    width: ${(props) => (props.$fullWidth ? "100%" : "250px")};
+    margin: 8px auto;
   }
 
   .nebula-textarea .textarea {
     width: 100%;
-    padding: 15px;
-    border: 2px solid #2a2a3a;
-    background: #00000f;
-    color: white;
-    font-size: 16px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    color: black;
+    font-size: 12px;
     outline: none;
     border-radius: 8px;
     transition: all 0.4s ease-out;
@@ -84,18 +139,19 @@ const StyledWrapper = styled.div<{ $fullWidth?: boolean }>`
   .nebula-textarea .user-label {
     position: absolute;
     left: 15px;
-    top: 15px;
+    top: 7px;
     pointer-events: none;
     color: #6a6a8a;
     transition: all 0.4s ease-out;
-    background: #00000f;
+    background: #f0f0f1ff;
     padding: 0 5px;
+    border-radius: 6px;
+    font-size: 14px;
   }
 
   .nebula-textarea .textarea:focus {
-    border-color: #b56aff;
-    box-shadow:
-      0 5px 8px rgba(181, 106, 255, 0.3),
+    border-color: #b19f9fff;
+    box-shadow: 0 5px 8px rgba(37, 36, 37, 0.3),
       0 10px 20px rgba(181, 106, 255, 0.2),
       0 15px 40px rgba(181, 106, 255, 0.15),
       0 20px 60px rgba(181, 106, 255, 0.1);
@@ -103,9 +159,9 @@ const StyledWrapper = styled.div<{ $fullWidth?: boolean }>`
 
   .nebula-textarea .textarea:focus ~ .user-label,
   .nebula-textarea .textarea:not(:placeholder-shown) ~ .user-label {
-    transform: translateY(-25px);
+    transform: translateY(-18px);
     font-size: 12px;
-    color: #d18cff;
+    color: #563352ff;
     left: 10px;
   }
 
