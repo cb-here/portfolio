@@ -8,7 +8,6 @@ import { FileUser } from "lucide-react";
 export default function Portfolio() {
   const [currentPage, setCurrentPage] = useState(1);
   const [direction, setDirection] = useState<"left" | "right">("right");
-  const totalPages = 5;
 
   const handlePageChange = (page: number) => {
     if (page > currentPage) {
@@ -17,20 +16,6 @@ export default function Portfolio() {
       setDirection("left");
     }
     setCurrentPage(page);
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      setDirection("right");
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentPage > 1) {
-      setDirection("left");
-      setCurrentPage(currentPage - 1);
-    }
   };
 
   return (
@@ -148,66 +133,6 @@ export default function Portfolio() {
             {currentPage === 4 && <Skills />}
             {currentPage === 5 && <Contact />}
           </div>
-        </div>
-
-        <div className="flex justify-between items-center pt-6 pb-8">
-          <button
-            onClick={handlePrev}
-            disabled={currentPage === 1}
-            className={`inline-flex items-center justify-center gap-2 font-sans font-medium min-w-11 min-h-11 rounded-full transition-all duration-300 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 select-none will-change-transform px-4 py-2 text-sm ${
-              currentPage === 1
-                ? "opacity-0 pointer-events-none -translate-x-2"
-                : "bg-black text-white hover:bg-gray-800 hover:shadow-lg hover:-translate-x-1 focus-visible:ring-gray-400 active:scale-95"
-            }`}
-            type="button"
-          >
-            <svg
-              width={14}
-              height={14}
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="transition-transform duration-300 group-hover:-translate-x-1"
-            >
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span>Prev</span>
-          </button>
-
-          <button
-            onClick={handleNext}
-            disabled={currentPage === totalPages}
-            className={`inline-flex items-center justify-center gap-2 font-sans font-medium min-w-11 min-h-11 rounded-full transition-all duration-300 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 select-none will-change-transform px-4 py-2 text-sm ${
-              currentPage === totalPages
-                ? "opacity-0 pointer-events-none translate-x-2"
-                : "bg-black text-white hover:bg-gray-800 hover:shadow-lg hover:translate-x-1 focus-visible:ring-gray-400 active:scale-95"
-            }`}
-            type="button"
-          >
-            <span>Next</span>
-            <svg
-              width={14}
-              height={14}
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            >
-              <path
-                d="M9 18L15 12L9 6"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
         </div>
       </div>
     </section>
