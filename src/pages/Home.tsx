@@ -131,7 +131,7 @@ export default function Home() {
           <Threads
             amplitude={1}
             distance={0}
-            enableMouseInteraction={true}
+            enableMouseInteraction={false}
             color={[0.6, 0.3, 0.9]}
           />
         </div>
