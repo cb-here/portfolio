@@ -128,8 +128,8 @@ export default function Portfolio() {
               </>
             )}
 
-            {currentPage === 2 && <Projects />}
-            {currentPage === 3 && <About />}
+            {currentPage === 3 && <Projects />}
+            {currentPage === 2 && <About />}
             {currentPage === 4 && <Skills />}
             {currentPage === 5 && <Contact />}
           </div>
