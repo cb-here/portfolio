@@ -91,7 +91,7 @@ export default function Portfolio() {
             {currentPage === 1 && (
               <>
                 <div className="space-y-2">
-                  <h1 className="text-title font-semibold text-black tracking-tight">
+                  <h1 className="text-[21px] sm:text-title font-semibold text-black tracking-tight">
                     Hi, I'm Chandrabhushan
                   </h1>
                   <p className="text-subtitle text-gray-500 font-medium mb-3">
