@@ -107,7 +107,7 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:hidden z-50">
           <a
             href="/portfolio"
-            className="group inline-flex items-center justify-center gap-2 font-sans font-medium min-w-[44px] min-h-[44px] rounded-full transition-[colors,box-shadow,transform] duration-150 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none aria-disabled:pointer-events-none select-none will-change-transform bg-black text-white hover:bg-gray-800 focus-visible:ring-gray-400 px-4 py-2 text-sm"
+            className="group inline-flex items-center justify-center gap-2 font-sans font-medium min-w-[44px] min-h-[44px] rounded-full transition-[colors,box-shadow,transform] duration-150 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none aria-disabled:pointer-events-none select-none will-change-transform bg-black text-white hover:bg-gray-800 focus-visible:ring-gray-400 px-4 py-2 text-sm whitespace-nowrap"
           >
             <span className="">Open Portfolio</span>
             <svg
