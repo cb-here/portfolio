@@ -1,6 +1,16 @@
 export default function Projects() {
   const projects = [
     {
+  title: "Suno Kahani",
+  description:
+    "Story-to-audio generator with Hinglish→Hindi translation and real-time text-to-speech playback.",
+  status: "In Progress",
+  liveUrl: "https://suno-kahani.vercel.app/", 
+  githubUrl: "https://github.com/cb-here/suno-kahani",
+  tags: ["React", "Node.js", "Express", "TTS", "Hinglish Translation"],
+},
+
+    {
       title: "Noter",
       description: "A note taking web app.",
       status: "Deployed",
